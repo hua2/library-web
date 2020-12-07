@@ -1,0 +1,31 @@
+/* 改变主题色变量 */
+$--background-color-base: #D7262E;
+$--border-color-base: #D7262E;
+$--color-primary: #D7262E;
+$--color-text-placeholder: #999999;
+$--color-text-primary: #000000;
+$--color-text-regular: #000000;
+
+$--checkbox-font-size: 12px;
+$--checkbox-font-weight: 400;
+$--dialog-content-font-size: 14px;
+$--dialog-title-font-size: 16px;
+$--input-font-color: #999999;
+$--input-small-font-size: 12px;
+$--input-width: 320px;
+$--radio-button-font-size: 12px;
+$--radio-font-size: 12px;
+$--radio-font-weight: 400;
+$--select-font-size: 12px;
+$--select-input-font-size: 12px;
+$--select-option-height: 32px;
+$--select-option-selected-font-color: $--color-primary;
+$--table-border-color: #F1F2F6;
+$--table-font-color: #1A1A1A;
+$--table-header-background-color: #F1F2F6;
+$--table-header-font-color: #1A1A1A;
+$--table-row-hover-background-color: #EEEEEE;
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";

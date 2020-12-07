@@ -1,0 +1,59 @@
+[
+  {
+    "title": "个人中心",
+    "permission": ["user","factory"],
+    "children": [
+      {
+        "title": "个人信息",
+        "permission": ["user","factory"],
+        "link": "/personal/index"
+      },
+      {
+        "title": "收藏记录",
+        "permission": ["user","factory"],
+        "link": "/personal/collect"
+      },
+      {
+        "title": "下载记录",
+        "permission": ["user","factory"],
+        "link": "/personal/download"
+      },
+      {
+        "title": "购买记录",
+        "permission": ["user","factory"],
+        "link": "/personal/buy"
+      },
+      {
+        "title": "账户信息",
+        "permission": ["user","factory"],
+        "link": "/personal/account"
+      },
+      {
+        "title": "修改密码",
+        "permission": ["user","factory"],
+        "link": "/personal/updatePwd"
+      },
+      {
+        "title": "修改手机",
+        "permission": ["user","factory"],
+        "link": "/personal/mobile"
+      }
+    ]
+  },
+  {
+    "title": "供图管理",
+    "permission": ["user","factory"],
+    "children": [
+      {
+        "title": "发布图片",
+        "permission": ["user","factory"],
+        "link": "/publish/index"
+      },
+      {
+        "title": "我的发布",
+        "permission": ["user","factory"],
+        "link": "/publish/release"
+      }
+    ]
+  }
+]

@@ -1,0 +1,148 @@
+// 注册表单
+.regist-form{
+  input {
+    border:1px solid rgba(153,153,153,1);
+    width:328px;
+    font-size: 12px;
+  }
+  .r-f-code{
+    input{
+      width: 100%;
+    }
+  }
+  .el-form-item__label{
+    font-size: 12px;
+  }
+  .el-checkbox__inner{
+    border:1px solid rgba(153,153,153,1);
+    width: 12px;
+    height: 12px;
+  }
+  .el-checkbox__label{
+    padding-left: 4px;
+    font-size: 12px;
+  }
+}
+// 红边框 input
+.r-p-form,
+.f-p-form,
+.login-form{
+  .el-input-group__append, .el-input-group__prepend,
+  .el-textarea__inner,
+  .el-input__inner{
+    border-color: #D7262E;
+    &:hover{
+      border-color: #999999;
+    }
+  }
+}
+// 忘记密码表单
+.r-p-form,
+.f-p-form{
+  input {
+    height: 42px;
+    line-height: 42px;
+    font-size: 12px;
+  }
+  .el-input-group__prepend{
+    padding: 0;
+    border: 0;
+  }
+}
+
+// 登录表单
+.login-form {
+  input {
+    height: 42px;
+    line-height: 42px;
+    font-size: 12px;
+  }
+  .el-form-item{
+    margin-bottom: 24px;
+  }
+  .el-form-item.l-f-agree{
+    margin-bottom: 0;
+  }
+  .el-form-item.l-f-login{
+    margin-bottom: 16px;
+  }
+  .el-input-group__prepend{
+    padding: 0;
+    border: 0;
+  }
+  .el-checkbox__inner{
+    width: 12px;
+    height: 12px;
+  }
+  .el-checkbox__label{
+    padding-left: 4px;
+    font-size: 12px;
+  }
+}
+
+//个人信息
+.personal {
+  .p-f-upload {
+    .el-form-item__label {
+      padding-top: 8px;
+    }
+  }
+}
+
+//个人中心-身份认证
+.identity{
+  .el-form-item__label{
+    font-size: 12px;
+    color: #000000;
+  }
+  .el-form-item__content{
+    display: flex;
+  }
+}
+//认证供图
+.attest {
+  width: 904px;
+  height: fit-content;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 32px 0 32px 24px;
+    .el-input{
+      width: 320px;
+    }
+  .msg-code-link{
+    right: 66px;
+  }
+  .attest-steps {
+    width: 480px;
+    margin: 24px auto 0 auto;
+  }
+  .m-s-code {
+    span {
+      width: 112px;
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+      margin-right: 8px;
+      text-align: right;
+    }
+  }
+  .m-s-btn {
+    width: 104px;
+    margin: 16px 0 0 188px;
+  }
+  .m-s-c-error {
+    left: 100px;
+    top: 32px;
+  }
+  .m-s-error {
+    left: 322px;
+    bottom: 78px;
+  }
+  .m-b-success {
+    margin: 32px 0;
+    img{
+      width: 150px;
+      height: 170px;
+    }
+  }
+
+}
