@@ -3,7 +3,7 @@
     <div v-loading="loading" class="d-list">
       <div v-for="(p,index) in productData.data" :key="index">
         <a href="#" @click="openLink(p.id)">
-          <img :src="p.watermarkImage" alt="" @load="setImgClass($event.target)" />
+          <img :src="p.watermarkImage" alt="" :width="p.width" :height="p.height" @load="setImgClass($event.target)" />
           <div class="d-l-mask">
             <span>{{ p.authorizationWay }}</span>
             <i class="el-icon-star-off" @click="collectClick(p.id)"></i>
@@ -43,7 +43,6 @@ export default {
   },
   watch: {
     $route(val) {
-      console.log(val)
       this.id = val.query.id
       this.productData.pageNumber = 1
       this.productData.pageSize = 20
@@ -52,7 +51,11 @@ export default {
   },
   created() {
     this.keyWords = this.$route.query.word
+    this.columnId = this.$route.query.id
     if (this.keyWords) {
+      this.loadAll()
+    }
+    if (this.columnId) {
       this.loadAll()
     }
   },
