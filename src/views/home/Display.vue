@@ -3,7 +3,7 @@
     <div v-loading="loading" class="d-list">
       <div v-for="(p,index) in productData.data" :key="index">
         <a href="#" @click="openLink(p.id)">
-          <img :src="p.watermarkImage" alt="" :width="p.width" :height="p.height" @load="setImgClass($event.target)" />
+          <img :src="p.watermarkImage" alt="" @load="setImgClass($event.target)" />
           <div class="d-l-mask">
             <span>{{ p.authorizationWay }}</span>
             <i class="el-icon-star-off" @click="collectClick(p.id)"></i>
@@ -114,7 +114,12 @@ export default {
       display: block;
       width: 100%;
       height: 100%;
-      padding: 0 10px 10px 0;
+      img{
+        width: 384px;
+        height: 285px;
+        object-fit: cover;
+        margin: 0 10px 10px 0;
+      }
       .d-l-mask{
         position: absolute;
         top: 0;

@@ -55,5 +55,21 @@
         "link": "/publish/release"
       }
     ]
+  },
+  {
+    "title": "消息",
+    "permission": ["user","factory"],
+    "children": [
+      {
+        "title": "系统消息",
+        "permission": ["user","factory"],
+        "link": "/personal/message"
+      },
+      {
+        "title": "其他消息",
+        "permission": ["user","factory"],
+        "link": "/personal/otherMessage"
+      }
+    ]
   }
 ]

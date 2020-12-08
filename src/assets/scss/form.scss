@@ -146,3 +146,25 @@
   }
 
 }
+// 个人中心-消息模块
+.message {
+  .message-content {
+    width: 904px;
+    height: fit-content;
+    padding: 16px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    p {
+      color: #999999;
+      margin-top: 8px;
+      font-size: 12px;
+      position: relative;
+    }
+  }
+  .message-other {
+    color: #999999;
+    height: 54px;
+    line-height: 54px;
+    text-align: center;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+}

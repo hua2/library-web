@@ -142,6 +142,10 @@ const user = {
   // 图片详情
   getDetail(params) {
     return axios.get(`/production/getDetail`, { params: params })
+  },
+  // 消息
+  messageList(params) {
+    return axios.get(`/message/list`, { params: params })
   }
 }
 

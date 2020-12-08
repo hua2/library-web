@@ -3,15 +3,15 @@
     <el-input v-model="keyWords" placeholder="搜索图片……">
       <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
     </el-input>
-    <div class="home-content">
-      <div v-for="(i,index) in hideData" :key="index" class="h-c-pic" @click="goToDisplay(i.id)">
+    <div v-loading="loading" class="home-content">
+      <div v-for="(i,index) in moreData" :key="index" class="h-c-pic" @click="goToDisplay(i.id)">
         <img :src="i.image" alt="">
         <div class="h-c-title">
           <h2>{{ i.title }}</h2>
           <div class="h-c-line" />
         </div>
       </div>
-      <div class="w-full h-c-more">更多 >></div>
+      <div class="w-full h-c-more" @click="moreClick">更多 >></div>
       <div class="w-full h-c-title">
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
         <div class="h-c-join flex">
@@ -38,7 +38,9 @@ export default {
   data() {
     return {
       hideData: [],
-      keyWords: ''
+      moreData: [],
+      keyWords: '',
+      loading: false
     }
   },
   created() {
@@ -58,11 +60,23 @@ export default {
       })
     },
     hideList() {
+      this.loading = true
       this.$api.user.hideList().then(res => {
+        this.loading = false
         if (res.code === 1000) {
           this.hideData = res.data
+          this.moreClick()
         }
       })
+    },
+    moreClick() {
+      if (this.hideData.length === this.moreData.length) {
+        this.$message.warning('无更多数据')
+        return
+      }
+      const st = this.moreData.length
+      const et = st + 4
+      this.moreData.push(...(this.hideData.slice(st, et)))
     }
   }
 }
@@ -124,6 +138,7 @@ export default {
     .h-c-more {
       font-size: 22px;
       color: #DA534D;
+      cursor: pointer;
       text-align: right;
     }
 

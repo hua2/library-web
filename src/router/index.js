@@ -151,6 +151,16 @@ const router = new Router({
           path: 'publish/release',
           component: () =>
               import(/* webpackChunkName: "publish_release" */ '@/views/publish/Release.vue')
+        },
+        {
+          path: 'personal/message',
+          component: () =>
+              import(/* webpackChunkName: "personal_message" */ '@/views/personal/Message.vue')
+        },
+        {
+          path: 'personal/otherMessage',
+          component: () =>
+              import(/* webpackChunkName: "personal_otherMessage" */ '@/views/personal/OtherMessage.vue')
         }
       ]
     }
