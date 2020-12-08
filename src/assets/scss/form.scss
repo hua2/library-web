@@ -168,3 +168,17 @@
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
   }
 }
+
+// search
+.home, .display, .details {
+  /deep/ {
+    .el-input {
+      width: 100%;
+      margin: 32px 0;
+    }
+
+    .el-input-group--append .el-input__inner {
+      height: 54px;
+    }
+  }
+}

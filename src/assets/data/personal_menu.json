@@ -42,32 +42,32 @@
   },
   {
     "title": "供图管理",
-    "permission": ["user","factory"],
+    "permission": ["factory"],
     "children": [
       {
         "title": "发布图片",
-        "permission": ["user","factory"],
+        "permission": ["factory"],
         "link": "/publish/index"
       },
       {
         "title": "我的发布",
-        "permission": ["user","factory"],
+        "permission": ["factory"],
         "link": "/publish/release"
       }
     ]
   },
   {
     "title": "消息",
-    "permission": ["user","factory"],
+    "permission": ["factory"],
     "children": [
       {
         "title": "系统消息",
-        "permission": ["user","factory"],
+        "permission": ["factory"],
         "link": "/personal/message"
       },
       {
         "title": "其他消息",
-        "permission": ["user","factory"],
+        "permission": ["factory"],
         "link": "/personal/otherMessage"
       }
     ]

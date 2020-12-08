@@ -1,13 +1,16 @@
 <template>
   <div class="details">
+    <el-input v-model="keyWords" placeholder="搜索图片……">
+      <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
+    </el-input>
     <div class="details-contain flex items-center">
       <div class="d-c-left">
-        <a href="#">
-          <img
-            :src="details.watermarkImage"
-            alt=""
-          />
-        </a>
+        <img
+          :src="details.watermarkImage"
+          :height="details.height"
+          :width="details.width"
+          alt=""
+        />
       </div>
       <div class="d-c-right">
         <h4>基本信息</h4>
@@ -51,6 +54,10 @@
         <span v-for="(d,index) in details.keyWordsList" :key="index" @click="searchClick(d)">{{ d }}
         </span></div>
     </div>
+    <div class="details-copy">
+      <h3>版权声明</h3>
+      <p>本网站图片、视频、音乐、设计、字体等版权作品（公关宣传类作品、公共领域作品及特殊设计加工类作品等除外）， 均由本网站或版权所有人授权本网站发布，本网站有权提供版权授权使用许可。如您需将版权作品用于包括但不限于公开媒介发布、 设计、展示、推广及其他等用途，请联系本网站签订协议，支付版权许可使用费。需授权许可的场景包括但不限于社交网络媒体（微博、微信公众号）、 网站、APP、书籍、报纸、期刊、电视节目、电影作品、展览、装修装饰、 包装设计、广告、公关活动、宣传图册、PPT演示等。 如您未经授权许可使用本网站的版权作品，则存在侵犯版权的法律风险，将依法承担法律责任。</p>
+    </div>
   </div>
 </template>
 
@@ -60,7 +67,8 @@ export default {
   data() {
     return {
       id: '',
-      details: {}
+      details: {},
+      keyWords: ''
     }
   },
   created() {
@@ -107,11 +115,13 @@ export default {
 .details{
   width: 100%;
   .details-contain {
-    padding: 100px 8px 8px;
+    padding: 8px;
     .d-c-left {
       width: 68%;
+      display: flex;
+      justify-content: center;
       img {
-        width: 100%;
+        max-width: 100%;
         max-height: 500px;
       }
     }
@@ -133,7 +143,7 @@ export default {
         margin-top: 24px;
         width: 100%;
         max-width: 368px;
-        height: 50px;
+        height: 48px;
         font-size: 16px;
         border: unset;
         margin-left: unset;
@@ -143,16 +153,16 @@ export default {
       }
     }
   }
+  h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 12px;
+    font-weight: bold;
+  }
   .details-keywords {
-    height: 300px;
-    width: 100%;
+    height: fit-content;
     padding: 8px;
-    h3 {
-      font-size: 18px;
-      color: #333;
-      margin: 0 0 12px;
-      font-weight: bold;
-    }
+    background: #fafafa;
     .d-k-word {
       height: 34px;
       cursor: pointer;
@@ -166,6 +176,14 @@ export default {
         border-radius: 3px;
         margin: 0 6px 6px 0;
       }
+    }
+  }
+  .details-copy{
+   margin: 24px 0 32px 0;
+    p{
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
     }
   }
 }

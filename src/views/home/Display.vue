@@ -1,28 +1,40 @@
 <template>
   <div class="display">
-    <div v-loading="loading" class="d-list">
-      <div v-for="(p,index) in productData.data" :key="index">
-        <a href="#" @click="openLink(p.id)">
-          <img :src="p.watermarkImage" alt="" @load="setImgClass($event.target)" />
+    <el-input v-model="keyWords" placeholder="搜索图片……">
+      <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
+    </el-input>
+    <div v-loading="loading">
+      <div v-if="productData.data.length > 0" class="d-list">
+        <div
+          v-for="(pic, index) in productData.data"
+          :key="index"
+          class="d-l-pic relative"
+          :style="{
+            flexBasis: (pic.width * 240) / pic.height + 'px',
+            flexGrow: (pic.width * 100) / pic.height
+          }"
+          @click="openLink(pic.id)"
+        >
+          <i :style="{ paddingBottom: (pic.height / pic.width) * 100 + '%' }"></i>
+          <img :src="pic.watermarkImage" />
           <div class="d-l-mask">
-            <span>{{ p.authorizationWay }}</span>
-            <i class="el-icon-star-off" @click="collectClick(p.id)"></i>
+            <span>{{ pic.authorizationWay }}</span>
+            <i class="el-icon-star-off" @click="collectClick(pic.id)"></i>
           </div>
-        </a>
+        </div>
       </div>
+      <p v-else>暂无数据</p>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-size="productData.pageSize"
+        :total="productData.totalNum"
+        class="mt-32 pr-32 flex justify-end"
+        @current-change="changePageClick"
+      >
+      </el-pagination>
     </div>
-    <p v-if="productData.data.length === 0">暂无数据</p>
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :page-size="productData.pageSize"
-      :total="productData.totalNum"
-      class="mt-32 pr-32 flex justify-end"
-      @current-change="changePageClick"
-    >
-    </el-pagination>
-  </div>
-</template>
+  </div></template>
 
 <script>
 export default {
@@ -60,16 +72,18 @@ export default {
     }
   },
   methods: {
+    searchClick(word) {
+      this.$router.push({
+        path: '/home/display',
+        query: { word: word }
+      })
+    },
     openLink(id) {
+      console.log('id', id)
       this.$router.push({
         path: '/home/details',
         query: { id: id }
       })
-    },
-    setImgClass(e) {
-      console.log(e)
-      // console.log('setAttribute', e.setAttribute)
-      // e.setAttribute('class', (e.width >= e.height ? 'landscape' : 'portrait')) // 原生js设置class
     },
     loadAll() {
       this.loading = true
@@ -102,47 +116,71 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.display{
+.display {
   width: 100%;
-  .d-list{
-    width: 100%;
+  height: 100%;
+
+  .d-list {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 24px;
-    a{
+    margin: 2px;
+    text-align: left;
+    // 最后一行展示形式，可注释掉查看另一种形式
+    &::after {
+      content: "";
+      flex-grow: 999999999;
+      order: 999999999;
+    }
+
+    .d-l-pic {
+      margin: 2px;
+      background-color: violet;
       position: relative;
-      display: block;
-      width: 100%;
-      height: 100%;
-      img{
-        width: 384px;
-        height: 285px;
-        object-fit: cover;
-        margin: 0 10px 10px 0;
+      cursor: pointer;
+      // 加载占位符
+      & > i {
+        display: block;
+        background-color: lightblue;
+        /* display: none; */
       }
-      .d-l-mask{
+
+      & > img {
+        position: absolute;
+        vertical-align: bottom;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      &:hover{
+        .d-l-mask{
+          opacity: 1;
+          background: rgba(0, 0, 0, 0.2)
+        }
+      }
+
+      .d-l-mask {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         opacity: 0;
+        background: #ffffff;
         transition: all 0.2s ease-in-out;
-        span{
+        z-index: 2000;
+        span {
           left: 12px;
           top: 12px;
           position: absolute;
         }
-        i{
+
+        i {
+          z-index: 2001;
           bottom: 24px;
           left: 12px;
+          cursor: pointer;
           position: absolute;
-        }
-      }
-      &:hover{
-        .d-l-mask{
-          opacity: 1;
-          background: rgba(0, 0, 0, 0.2)
         }
       }
     }

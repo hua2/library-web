@@ -85,15 +85,6 @@ export default {
 <style scoped lang="scss">
 .home {
   width: 100%;
-  /deep/{
-    .el-input{
-      width: 100%;
-      margin: 32px 0 64px 0;
-    }
-    .el-input-group--append .el-input__inner{
-      height: 54px;
-    }
-  }
   .home-content {
     width: 100%;
     display: flex;

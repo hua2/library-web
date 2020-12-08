@@ -93,14 +93,15 @@ export default {
   },
   computed: {
     account() {
-      return this.$store.state.account.account
+      return this.$store.state.account
     }
   },
   methods: {
     checkPermission(permission) {
+      console.log('permission', permission)
       if (permission && permission instanceof Array && permission.length > 0) {
         const roles = ['user']
-        if (this.account.authstatus === '1' || this.account.authstatus === '3' || this.account.authstatus === '4') {
+        if (this.account.authstatus === '1') {
           roles.push('factory')
         }
         const permissionRoles = permission
