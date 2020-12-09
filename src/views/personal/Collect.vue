@@ -51,12 +51,14 @@
       @current-change="changePageClick"
     >
     </el-pagination>
+    <DownloadDialog ref="downloadDialog" />
   </div>
 </template>
 
 <script>
 import CollectShopCard from '@/views/personal/components/CollectShopCard'
 import CollectTime from '@/views/personal/components/CollectTime'
+import DownloadDialog from '@/views/home/dialog/DownloadDialog'
 /**
  * 个人中心-收藏记录模块
  * @author lyh
@@ -64,7 +66,7 @@ import CollectTime from '@/views/personal/components/CollectTime'
  */
 export default {
   name: 'Personal',
-  components: { CollectTime, CollectShopCard },
+  components: { DownloadDialog, CollectTime, CollectShopCard },
   data() {
     return {
       checkAll: false,
@@ -84,7 +86,8 @@ export default {
         endTime: ''
       },
       ids: '',
-      id: ''
+      id: '',
+      record: {}
     }
   },
   created() {
@@ -142,9 +145,19 @@ export default {
     downloadClick(id) {
       this.$api.user.userDownloadRecord({ productionId: id }).then(res => {
         if (res.code === 1000) {
-          this.downloadRecord = res.data
+          this.record = res.data
+          console.log(this.record.isCan)
+          if (this.record.isCan === 0) {
+            this.downloadDialogClick()
+          } else {
+            window.open(this.record.url)
+          }
         }
       })
+    },
+    // 下载充会员
+    downloadDialogClick() {
+      this.$refs.downloadDialog.dialogVisible = true
     },
     openLink(id) {
       this.$router.push({

@@ -13,13 +13,19 @@
             flexBasis: (pic.width * 240) / pic.height + 'px',
             flexGrow: (pic.width * 100) / pic.height
           }"
-          @click="openLink(pic.id)"
         >
           <i :style="{ paddingBottom: (pic.height / pic.width) * 100 + '%' }"></i>
-          <img :src="pic.watermarkImage" />
+          <template>
+            <img :src="pic.watermarkImage" />
+            <div class="shadow" @click="openLink(pic.id)"></div>
+          </template>
           <div class="d-l-mask">
-            <span>{{ pic.authorizationWay }}</span>
             <i class="el-icon-star-off" @click="collectClick(pic.id)"></i>
+          </div>
+          <div class="d-l-sign">
+            <span>
+              {{ pic.authorizationWay }}
+            </span>
           </div>
         </div>
       </div>
@@ -41,7 +47,7 @@ export default {
   name: 'Display',
   data() {
     return {
-      columnId: this.$route.query.id,
+      columnId: '',
       keyWords: '',
       loading: false,
       productData: {
@@ -55,7 +61,7 @@ export default {
   },
   watch: {
     $route(val) {
-      this.id = val.query.id
+      this.columnId = val.query.id
       this.productData.pageNumber = 1
       this.productData.pageSize = 20
       this.loadAll()
@@ -79,7 +85,6 @@ export default {
       })
     },
     openLink(id) {
-      console.log('id', id)
       this.$router.push({
         path: '/home/details',
         query: { id: id }
@@ -152,35 +157,64 @@ export default {
         height: 100%;
         object-fit: cover;
       }
-      &:hover{
-        .d-l-mask{
-          opacity: 1;
-          background: rgba(0, 0, 0, 0.2)
-        }
-      }
-
-      .d-l-mask {
+      & > .shadow{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         opacity: 0;
-        background: #ffffff;
+        background: rgba(0, 0, 0, 0.2);
         transition: all 0.2s ease-in-out;
-        z-index: 2000;
-        span {
-          left: 12px;
-          top: 12px;
-          position: absolute;
-        }
-
-        i {
+      }
+      &:hover{
+        .d-l-mask{
+          opacity: 1;
           z-index: 2001;
-          bottom: 24px;
-          left: 12px;
+        }
+        .d-l-sign{
+           opacity: 1;
+        }
+        .shadow{
+          z-index: 2000;
+          opacity: 1;
+        }
+      }
+
+      .d-l-mask {
+        position: absolute;
+        left: 16px;
+        right: 18px;
+        bottom: 20px;
+        text-align: left;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: all 0.2s ease-in-out;
+        i {
+          width: 32px;
+          height: 32px;
+          text-align: center;
+          line-height: 32px;
+          border-radius: 2px;
+          margin: 0 4px 4px 0;
           cursor: pointer;
-          position: absolute;
+          user-select: none;
+        }
+      }
+      .d-l-sign{
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        cursor: pointer;
+        opacity: 0;
+        span{
+          font-size: 14px;
+          padding: 0 5px;
+          background: #fff;
+          color: #666666;
+          vertical-align: middle;
+          border-radius: 2px;
+          transition: all 0.2s ease-in-out
         }
       }
     }

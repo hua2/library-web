@@ -7,8 +7,6 @@
       <div class="d-c-left">
         <img
           :src="details.watermarkImage"
-          :height="details.height"
-          :width="details.width"
           alt=""
         />
       </div>
@@ -21,7 +19,7 @@
           </p>
           <p>
             <span class="d-c-title">作者/来源：</span>
-            <span>{{ details.name }}</span>
+            <span>{{ details.authorName }}</span>
           </p>
           <p>
             <span class="d-c-title">最大尺寸：</span>
@@ -32,10 +30,6 @@
             <span>{{ details.format }}</span>
           </p>
           <p>
-            <span class="d-c-title">授权方式：</span>
-            <span>{{ details.authorizationWay }}</span>
-          </p>
-          <p>
             <span class="d-c-title">介绍：</span>
             <span>{{ details.introduce }}</span>
           </p>
@@ -44,8 +38,16 @@
             <span>{{ details.rightExplain }}</span>
           </p>
         </div>
-        <el-button type="primary" icon="el-icon-star-off" @click="collectClick(details.id)">加入收藏</el-button>
-        <el-button type="primary" class="btn" icon="el-icon-download" @click="downloadClick(details.id)">图片下载</el-button>
+        <el-button v-if="details.collect === 1" type="primary" icon="el-icon-star-on" @click="cancelCollect(details.id)">
+          取消收藏
+        </el-button>
+        <el-button v-else type="primary" icon="el-icon-star-off" @click="collectClick(details.id)">
+          加入收藏
+        </el-button>
+        <el-button type="primary" class="btn" icon="el-icon-download" @click="downloadClick(details.id)">
+          图片下载
+          <a :href="record.url" :download="record.url">
+          </a></el-button>
       </div>
     </div>
     <div class="details-keywords">
@@ -58,16 +60,23 @@
       <h3>版权声明</h3>
       <p>本网站图片、视频、音乐、设计、字体等版权作品（公关宣传类作品、公共领域作品及特殊设计加工类作品等除外）， 均由本网站或版权所有人授权本网站发布，本网站有权提供版权授权使用许可。如您需将版权作品用于包括但不限于公开媒介发布、 设计、展示、推广及其他等用途，请联系本网站签订协议，支付版权许可使用费。需授权许可的场景包括但不限于社交网络媒体（微博、微信公众号）、 网站、APP、书籍、报纸、期刊、电视节目、电影作品、展览、装修装饰、 包装设计、广告、公关活动、宣传图册、PPT演示等。 如您未经授权许可使用本网站的版权作品，则存在侵犯版权的法律风险，将依法承担法律责任。</p>
     </div>
+    <DownloadDialog ref="downloadDialog" />
   </div>
 </template>
 
 <script>
+import DownloadDialog from '@/views/home/dialog/DownloadDialog'
 export default {
   name: 'Details',
+  components: { DownloadDialog },
   data() {
     return {
       id: '',
       details: {},
+      record: {
+        isCan: 0,
+        url: ''
+      },
       keyWords: ''
     }
   },
@@ -78,8 +87,12 @@ export default {
     }
   },
   methods: {
+    // 下载充会员
+    downloadDialogClick() {
+      this.$refs.downloadDialog.dialogVisible = true
+      this.$refs.downloadDialog.productMember()
+    },
     searchClick(word) {
-      console.log('details', word)
       this.$router.push({
         path: '/home/display',
         query: { word: word }
@@ -90,15 +103,56 @@ export default {
       this.$api.user.userCollect({ productionId: id }).then(res => {
         if (res.code === 1000) {
           this.$message.success('收藏成功')
+          this.getDetail()
         }
       })
+    },
+    // 取消收藏
+    cancelCollect(id) {
+      this.$api.user.cancelCollect({ productionId: id }).then(res => {
+        if (res.code === 1000) {
+          this.$message.success('取消收藏成功')
+          this.getDetail()
+        }
+      })
+    },
+    down(url) {
+      const link = document.createElement('a')
+      link.style.display = 'none'
+      link.href = url
+      link.setAttribute('download', url)
+
+      document.body.appendChild(link)
+      link.click()
+      // 释放URL对象所占资源
+      window.URL.revokeObjectURL(url)
+      // 用完即删
+      document.body.removeChild(link)
     },
     downloadClick(id) {
       this.$api.user.userDownloadRecord({ productionId: id }).then(res => {
         if (res.code === 1000) {
-          this.downloadRecord = res.data
+          this.record = res.data
+          if (this.record.isCan === 0) {
+            this.downloadDialogClick()
+          } else {
+            this.down(this.record.url)
+          }
         }
       })
+    },
+    download(data) {
+      if (!data) {
+        return
+      }
+      const url = window.URL.createObjectURL(new Blob([data]))
+      const link = document.createElement('a')
+      link.style.display = 'none'
+      link.href = url
+      link.setAttribute('download', 'excel.xlsx')
+
+      document.body.appendChild(link)
+      link.click()
     },
     getDetail() {
       this.$api.user.getDetail({ id: this.id }).then(res => {
@@ -121,13 +175,14 @@ export default {
       display: flex;
       justify-content: center;
       img {
-        max-width: 100%;
-        max-height: 500px;
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
       }
     }
     .d-c-right {
       width: 32%;
-      padding: 82px 16px 16px;
+      padding: 72px 16px 16px;
       p {
         font-size: 12px;
         line-height: 1.6;

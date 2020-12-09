@@ -173,6 +173,8 @@ const router = new Router({
 
 const whiteList = [
   '/home',
+  '/home/display',
+  '/home/details',
   '/login/index',
   '/login/forget-pwd',
   '/login/reset-pwd',

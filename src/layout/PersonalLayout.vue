@@ -7,10 +7,10 @@
       </el-input>
       <div class="p-l-attest flex">
         <img src="../assets/img/attest-icon.png" alt="">
-        <span v-if="account.authStatus ===3" @click="$router.push('/attest/underReview')">审核中</span>
-        <span v-if="account.authStatus ===4" @click="$router.push('/attest/refuseStatus')">已拒绝</span>
-        <span v-if="account.authStatus ===0 ||account.authStatus ===2" @click="$router.push('/attest/index')">{{ account.authstatus===0?'认证供图':'已认证' }}</span>
-        <span v-if="account.authStatus ===1" @click="$router.push('/attest/index')">个人已认证</span>
+        <span v-if="account.authStatus === 3" @click="$router.push('/attest/underReview')">审核中</span>
+        <span v-if="account.authStatus === 4" @click="$router.push('/attest/refuseStatus')">已拒绝</span>
+        <span v-if="account.authStatus === 0 ||account.authStatus === 2" @click="$router.push('/attest/index')">{{ account.authstatus === 0?'认证供图':'已认证' }}</span>
+        <span v-if="account.authStatus === 1" @click="$router.push('/attest/index')">个人已认证</span>
       </div>
     </div>
     <div class="p-l-left flex">
@@ -93,7 +93,7 @@ export default {
   },
   computed: {
     account() {
-      return this.$store.state.account
+      return this.$store.state.account.account
     }
   },
   methods: {
@@ -101,8 +101,8 @@ export default {
       console.log('permission', permission)
       if (permission && permission instanceof Array && permission.length > 0) {
         const roles = ['user']
-        if (this.account.authstatus === '1') {
-          roles.push('factory')
+        if (this.account.authStatus === 1) {
+          roles.push('authenticator')
         }
         const permissionRoles = permission
 

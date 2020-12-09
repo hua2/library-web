@@ -146,6 +146,14 @@ const user = {
   // 消息
   messageList(params) {
     return axios.get(`/message/list`, { params: params })
+  },
+  // 下载购买图片
+  prodMember(params) {
+    return axios.get(`/user/prodMember`, { params: params })
+  },
+  // 个人中心-
+  member(params) {
+    return axios.get(`/user/member`, { params: params })
   }
 }
 

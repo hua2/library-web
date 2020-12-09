@@ -1,73 +1,73 @@
 [
   {
     "title": "个人中心",
-    "permission": ["user","factory"],
+    "permission": ["user","authenticator"],
     "children": [
       {
         "title": "个人信息",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/index"
       },
       {
         "title": "收藏记录",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/collect"
       },
       {
         "title": "下载记录",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/download"
       },
       {
         "title": "购买记录",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/buy"
       },
       {
         "title": "账户信息",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/account"
       },
       {
         "title": "修改密码",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/updatePwd"
       },
       {
         "title": "修改手机",
-        "permission": ["user","factory"],
+        "permission": ["user","authenticator"],
         "link": "/personal/mobile"
       }
     ]
   },
   {
     "title": "供图管理",
-    "permission": ["factory"],
+    "permission": ["authenticator"],
     "children": [
       {
         "title": "发布图片",
-        "permission": ["factory"],
+        "permission": ["authenticator"],
         "link": "/publish/index"
       },
       {
         "title": "我的发布",
-        "permission": ["factory"],
+        "permission": ["authenticator"],
         "link": "/publish/release"
       }
     ]
   },
   {
     "title": "消息",
-    "permission": ["factory"],
+    "permission": ["authenticator"],
     "children": [
       {
         "title": "系统消息",
-        "permission": ["factory"],
+        "permission": ["authenticator"],
         "link": "/personal/message"
       },
       {
         "title": "其他消息",
-        "permission": ["factory"],
+        "permission": ["authenticator"],
         "link": "/personal/otherMessage"
       }
     ]

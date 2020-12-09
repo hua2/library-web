@@ -2,7 +2,6 @@
  * api接口的统一出口
  */
 
-import collect from './collect'
 import user from './user'
 // 用户模块接口
 
@@ -10,7 +9,6 @@ import user from './user'
 
 // 导出接口
 export default {
-  collect,
   user
   // ……
 }

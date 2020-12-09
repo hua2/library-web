@@ -37,7 +37,7 @@ const errorHandle = (status, other) => {
 // 创建axios实例
 var instance = axios.create({
   timeout: 1000 * 12,
-  baseURL: 'http://192.168.4.2:8080/'
+  baseURL: 'http://pre.jiaomamro.com:8080/'
 })
 // 设置post请求头
 instance.defaults.headers.post['Content-Type'] =
@@ -55,6 +55,9 @@ instance.interceptors.request.use(
     // 有 token就带上
     if (store.state.account.token) {
       // 更改登录后需要替换的接口地址
+      if (config.url === '/production/getDetail') {
+        config.url = '/production/getDetailLogin'
+      }
       config.headers['md-token'] = store.state.account.token
     }
     return config

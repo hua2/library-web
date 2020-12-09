@@ -59,7 +59,7 @@
               type="text"
               size="small"
               class="after-btn"
-              @click="userDownloadRecord(scope.row.object.id)"
+              @click="downloadClick(scope.row.object.id)"
             >
               下载
             </el-button>
@@ -101,17 +101,20 @@ export default {
         pageNumber: 1
       },
       isLoading: false,
-      downloadRecord: {}
+      record: {}
     }
   },
   created() {
     this.loadAll()
   },
   methods: {
-    userDownloadRecord(id) {
+    downloadClick(id) {
       this.$api.user.userDownloadRecord({ productionId: id }).then(res => {
         if (res.code === 1000) {
-          this.downloadRecord = res.data
+          this.record = res.data
+          if (this.record.isCan === 1) {
+            window.open(this.record.url)
+          }
         }
       })
     },
