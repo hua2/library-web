@@ -8,8 +8,8 @@
           <strong>{{ account.nickname }}</strong>
           <template v-if="account.memberStatus !==0">
             <span>普通会员</span>
-            <h5 class="ml-64">{{ account.memberStartTime | moment("YYYY-MM-DD HH:mm") }}</h5>-
-            <h5>{{ account.memberEndTime | moment("YYYY-MM-DD HH:mm") }}</h5>
+            <h5 class="ml-64 mr-4">{{ account.memberStartTime | moment("YYYY-MM-DD HH:mm") }}</h5>-
+            <h5 class="ml-4">{{ account.memberEndTime | moment("YYYY-MM-DD HH:mm") }}</h5>
           </template>
         </div>
       </div>

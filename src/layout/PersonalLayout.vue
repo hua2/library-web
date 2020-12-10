@@ -96,6 +96,11 @@ export default {
       return this.$store.state.account.account
     }
   },
+  watch: {
+    $route(val) {
+      this.active = val.path
+    }
+  },
   methods: {
     checkPermission(permission) {
       if (permission && permission instanceof Array && permission.length > 0) {

@@ -16,11 +16,11 @@
 
             <el-form-item label="类型：">
               <el-select v-model="form.type" :disabled="this.id !== ''">
-                <el-option label="个人" :value="0"></el-option>
-                <el-option label="企业" :value="1"></el-option>
+                <el-option label="个人" :value="1"></el-option>
+                <el-option label="企业" :value="2"></el-option>
               </el-select>
             </el-form-item>
-            <template v-if="form.type===1">
+            <template v-if="form.type===2">
               <el-form-item label="公司名称：">
                 <el-input v-model="form.companyName" :disabled="this.id !== ''"></el-input>
               </el-form-item>
@@ -28,7 +28,7 @@
                 <el-input v-model="form.businessLicenseNumber" :disabled="this.id !== ''"></el-input>
               </el-form-item>
             </template>
-            <el-form-item :label="form.type===1?'负责人姓名：':'姓名：'">
+            <el-form-item :label="form.type===2?'负责人姓名：':'姓名：'">
               <el-input v-model="form.principalName"></el-input>
             </el-form-item>
             <el-form-item label="身份证号码：">
@@ -69,7 +69,7 @@
               </el-checkbox>
             </div>
             <el-button
-              v-if="form.type===1"
+              v-if="form.type===2"
               type="primary"
               size="small"
               class="m-s-btn"
@@ -162,7 +162,7 @@ export default {
         return
       }
       let authMethods = 'personalAuth'
-      if (this.form.type === 1) {
+      if (this.form.type === 2) {
         authMethods = 'companyAuth'
       }
       if (this.id) {

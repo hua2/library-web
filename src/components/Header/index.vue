@@ -14,15 +14,15 @@
       ></div>
     </swiper>
     <div class="header">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <div class="flex justify-between">
           <div class="flex">
             <img src="../../assets/img/logo-main.png" alt="" @click="$router.push('/home')">
             <el-submenu index="1" class="h-sub">
               <template slot="title">图片</template>
-              <el-menu-item v-for="(h,index) in hideData" :key="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
+              <el-menu-item v-for="(h,index) in hideData" :key="index" index="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
             </el-submenu>
-            <el-menu-item index="2">人物</el-menu-item>
+            <!--            <el-menu-item index="2">人物</el-menu-item>-->
           </div>
           <div class="flex">
             <el-menu-item index="3">
@@ -45,6 +45,7 @@
                 <el-menu-item index="2-1" @click="$router.push('/personal/index')">个人信息</el-menu-item>
                 <el-menu-item index="2-2" @click="$router.push('/personal/account')">账户信息</el-menu-item>
                 <el-menu-item index="2-3" @click="$router.push('/personal/updatePwd')">修改密码</el-menu-item>
+                <el-menu-item index="2-3" @click="exitLogout">退出</el-menu-item>
               </el-submenu>
             </template>
 
@@ -75,7 +76,6 @@ export default {
           }
         }
       },
-      activeIndex: '1',
       hideData: []
     }
   },
@@ -88,6 +88,22 @@ export default {
     this.hideList()
   },
   methods: {
+    authClick() {
+      if (this.account.authStatus === 1) {
+        this.$router.push('/attest/index')
+      } else if (this.account.authStatus === 3) {
+        this.$router.push('/attest/underReview')
+      } else if (this.account.authStatus === 4) {
+        this.$router.push('/attest/refuseStatus')
+      } else {
+        this.$router.push('/attest/index')
+      }
+    },
+    // 退出登录
+    exitLogout() {
+      this.$store.commit('logout')
+      this.$router.push('/login/index')
+    },
     picLink(id) {
       this.$router.push({
         path: '/home/display',
@@ -102,7 +118,9 @@ export default {
       })
     },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+      if (key === '3') {
+        this.authClick()
+      }
       if (key === '4') {
         this.$router.push('/regist/index')
       }
@@ -148,7 +166,6 @@ export default {
     .el-menu-item:hover, .el-menu-item:focus{
       color: #f84949;
       background-color: transparent;
-
     }
     /deep/{
       .el-submenu .el-submenu__title{

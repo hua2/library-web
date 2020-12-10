@@ -47,27 +47,6 @@
               <a
                 href="javascript:"
                 class="mr-48"
-                @click="$router.push('/personal/collect')"
-              >收藏记录</a>
-            </div>
-            <div class="m-h-r-info mb-12">
-              <a
-                href="javascript:"
-                class="mr-48"
-                @click="$router.push('/personal/download')"
-              >下载记录</a>
-            </div>
-            <div class="m-h-r-info mb-12">
-              <a
-                href="javascript:"
-                class="mr-48"
-                @click="$router.push('/personal/buy')"
-              >购买记录</a>
-            </div>
-            <div class="m-h-r-info mb-12">
-              <a
-                href="javascript:"
-                class="mr-48"
                 @click="$router.push('/personal/account')"
               >账户信息</a>
             </div>
@@ -77,13 +56,6 @@
                 class="mr-48"
                 @click="$router.push('/personal/updatePwd')"
               >修改密码</a>
-            </div>
-            <div class="m-h-r-info mb-12">
-              <a
-                href="javascript:"
-                class="mr-48"
-                @click="$router.push('/personal/mobile')"
-              >修改手机</a>
             </div>
             <div class="m-h-r-info flex" @click="exitLogout">
               <img
@@ -98,23 +70,26 @@
         <a
           href="javascript:"
           class="flex items-center relative mr-32 pr-16"
-          @click="$router.push('')"
         >
-          <i class="el-icon-picture-outline"></i>
-          <span>图片</span>
+          <el-menu class="el-menu-demo" mode="horizontal">
+            <el-submenu index="1">
+              <template slot="title">图片</template>
+              <el-menu-item v-for="(h,index) in hideData" :key="index" index="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
+            </el-submenu>
+          </el-menu>
         </a>
+        <!--        <a-->
+        <!--          href="javascript:"-->
+        <!--          class="flex items-center relative mr-32 pr-16"-->
+        <!--          @click="$router.push('')"-->
+        <!--        >-->
+        <!--          <i class="el-icon-s-opportunity"></i>-->
+        <!--          <span>人物</span>-->
+        <!--        </a>-->
         <a
           href="javascript:"
           class="flex items-center relative mr-32 pr-16"
-          @click="$router.push('')"
-        >
-          <i class="el-icon-s-opportunity"></i>
-          <span>人物</span>
-        </a>
-        <a
-          href="javascript:"
-          class="flex items-center relative mr-32 pr-16"
-          @click="$router.push('')"
+          @click="authClick"
         >
           <i class="el-icon-upload"></i>
           <span>供图</span>
@@ -131,6 +106,7 @@ export default {
   components: { MainLogo },
   data() {
     return {
+      hideData: []
     }
   },
   computed: {
@@ -138,11 +114,38 @@ export default {
       return this.$store.state.account.account
     }
   },
+  created() {
+    this.hideList()
+  },
   methods: {
+    authClick() {
+      if (this.account.authStatus === 1) {
+        this.$router.push('/attest/index')
+      } else if (this.account.authStatus === 3) {
+        this.$router.push('/attest/underReview')
+      } else if (this.account.authStatus === 4) {
+        this.$router.push('/attest/refuseStatus')
+      } else {
+        this.$router.push('/attest/index')
+      }
+    },
     // 退出登录
     exitLogout() {
       this.$store.commit('logout')
       this.$router.push('/login/index')
+    },
+    hideList() {
+      this.$api.user.hideList().then(res => {
+        if (res.code === 1000) {
+          this.hideData = res.data
+        }
+      })
+    },
+    picLink(id) {
+      this.$router.push({
+        path: '/home/display',
+        query: { id: id }
+      })
     }
   }
 }
@@ -150,8 +153,21 @@ export default {
 
 <style scoped lang="scss">
 .main-header {
+  /deep/{
+    .el-menu{
+      background-color: transparent;
+      border: unset;
+    }
+    .el-menu--horizontal > .el-submenu .el-submenu__title{
+      color: #ffffff;
+      font-size: 14px;
+    }
+    .el-menu--horizontal > .el-submenu .el-submenu__title:hover{
+      background-color: transparent;
+    }
+  }
   a {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     color: #ffffff;
   }
