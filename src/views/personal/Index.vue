@@ -8,22 +8,28 @@
           <strong>{{ account.nickname }}</strong>
           <template v-if="account.memberStatus !==0">
             <span>普通会员</span>
-            <h5>{{ account.memberStartTime | moment("YYYY-MM-DD HH:mm") }}</h5>-
+            <h5 class="ml-64">{{ account.memberStartTime | moment("YYYY-MM-DD HH:mm") }}</h5>-
             <h5>{{ account.memberEndTime | moment("YYYY-MM-DD HH:mm") }}</h5>
           </template>
         </div>
-        <!--        <div class="p-i-status">-->
-        <!--          <span>已经完善</span>-->
-        <!--        </div>-->
       </div>
       <p>普通会员下载需单图支付费用，升级年会员无限下载。</p>
-      <div class="p-i-vip flex items-center">
-        <span>升级VIP</span>
-        <div class="p-i-num">年VIP <span>99元</span>/年
+      <div class="flex items-center">
+        <div class="ml-64 mr-12">会员时长</div>
+        <div>
+          <el-radio-group v-model="radio">
+            <el-radio v-for="(li, index) in listData" :key="index" :label="li.type">{{ li.name }} {{ li.price/100 }} 元</el-radio>
+          </el-radio-group>
         </div>
       </div>
+      <div class="p-i-btn">
+        <span @click="buyClick">升级VIP</span>
+      </div>
     </div>
-  </div></template>
+    <MemberDialog ref="memberDialog" @close="closeClick" />
+    <MemberPayment ref="memberPaymentDialog" />
+  </div>
+</template>
 
 <script>
 /**
@@ -32,11 +38,16 @@
  * @date 2020-11-20
  */
 import PersonalHeader from '@/components/PersonalHeader/index'
+import MemberDialog from '@/views/personal/dialog/MemberDialog'
+import MemberPayment from '@/views/personal/dialog/MemberPayment'
 export default {
   name: 'Index',
-  components: { PersonalHeader },
+  components: { MemberPayment, MemberDialog, PersonalHeader },
   data() {
     return {
+      listData: [],
+      radio: 1,
+      checkPaiedIntervalId: null
     }
   },
   computed: {
@@ -45,8 +56,58 @@ export default {
     }
   },
   created() {
+    this.memberList()
+  },
+  beforeDestroy() {
+    if (this.checkPaiedIntervalId) {
+      clearInterval(this.checkPaiedIntervalId)
+    }
   },
   methods: {
+    closeClick() {
+      if (this.checkPaiedIntervalId) {
+        clearInterval(this.checkPaiedIntervalId)
+      }
+    },
+    memberList() {
+      this.$api.user.member().then(res => {
+        if (res.code === 1000) {
+          this.listData = res.data
+        }
+      })
+    },
+    buyClick() {
+      this.$refs.memberDialog.dialogVisible = true
+      this.userOrderSubmit()
+    },
+    // 详情-用户购买订单
+    userOrderSubmit() {
+      this.$api.user.userOrderSubmit({
+        orderType: this.radio,
+        payment: 1
+      }).then(res => {
+        if (res.code === 1000) {
+          this.$refs.memberDialog.qrCode = res.data.qrCode
+          this.$refs.memberDialog.price = res.data.price
+          this.checkPaied(res.data.orderCode)
+        }
+      })
+    },
+    // 查询交易是否成功
+    checkPaied(orderCode) {
+      if (this.checkPaiedIntervalId) {
+        clearInterval(this.checkPaiedIntervalId)
+      }
+      this.checkPaiedIntervalId = setInterval(() => {
+        this.$api.user.queryOrder({ orderCode }).then(res => {
+          if (res.code === 1000 && res.data != null) {
+            clearInterval(this.checkPaiedIntervalId)
+            this.$refs.memberDialog.dialogVisible = false
+            this.$refs.memberPaymentDialog.dialogFormVisible = true
+          }
+        })
+      }, 1000)
+    }
   }
 }
 </script>
@@ -79,39 +140,20 @@ export default {
     }
     h5{
       color: #858B93;
-      margin-left: 64px;
-    }
-    .p-i-status{
-     span{
-       color: #35D726;
-       background: unset;
-     }
     }
     p{
       margin-left: 88px;
+      margin-bottom: 24px;
     }
-    .p-i-vip{
-     margin-top: 24px;
+    .p-i-btn{
+      margin: 24px 0 0 108px;
       span{
         color: #0067C6;
-        padding: 2px 8px;
+        padding: 3px 12px;
         background: #ffffff;
         border-radius: 14px;
         border: 1px solid #0067C6;
-        margin: 0 12px 0 64px;
-      }
-      .p-i-num{
-        width: 208px;
-        padding: 2px 0 2px 6px;
-        border-radius: 4px;
-        border: 1px solid #E1E2E9;
-       span{
-         margin: 0;
-         padding: 0;
-         border: unset;
-         color: #E93535;
-         background: #ffffff;
-       }
+        margin: 0 12px 0 24px;
       }
     }
   }

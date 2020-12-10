@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     picLink(id) {
-      console.log('id', id)
       this.$router.push({
         path: '/home/display',
         query: { id: id }

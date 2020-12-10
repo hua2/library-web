@@ -5,8 +5,6 @@
       <canvas ref="canvas" />
     </div>
     <strong class="text-16">支付方式：微信扫码支付</strong>
-    <p>能源图库会员更优惠</p>
-    <el-button type="primary" @click="goToClick">了解详情</el-button>
   </el-dialog>
 </template>
 
@@ -18,10 +16,11 @@
  */
 import QRCode from 'qrcode'
 export default {
-  name: 'DownloadDialog',
+  name: 'MemberDialog',
   data() {
     return {
       dialogVisible: false,
+      data: {},
       qrCode: undefined,
       price: undefined
     }
@@ -36,10 +35,6 @@ export default {
   methods: {
     handlerClose() {
       this.$emit('close')
-    },
-    goToClick() {
-      this.$emit('close')
-      this.$router.push('/personal/index')
     },
     initByVal(val) {
       QRCode.toCanvas(this.$refs.canvas, val, error => {
@@ -87,15 +82,6 @@ export default {
         height: 120px;
         margin: 12px auto;
       }
-    }
-    p{
-      color: #666;
-      margin: 16px 0 8px 0;
-    }
-    .el-button{
-      height: 30px;
-      padding: 4px 16px;
-      border-radius: 16px;
     }
   }
 }

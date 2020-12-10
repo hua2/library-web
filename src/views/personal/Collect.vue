@@ -51,7 +51,8 @@
       @current-change="changePageClick"
     >
     </el-pagination>
-    <DownloadDialog ref="downloadDialog" />
+    <DownloadDialog ref="downloadDialog" @close="closeClick" />
+    <CompletePayment ref="paymentDialog" @pay="downloadClick" />
   </div>
 </template>
 
@@ -59,6 +60,7 @@
 import CollectShopCard from '@/views/personal/components/CollectShopCard'
 import CollectTime from '@/views/personal/components/CollectTime'
 import DownloadDialog from '@/views/home/dialog/DownloadDialog'
+import CompletePayment from '@/views/home/dialog/CompletePayment'
 /**
  * 个人中心-收藏记录模块
  * @author lyh
@@ -66,7 +68,7 @@ import DownloadDialog from '@/views/home/dialog/DownloadDialog'
  */
 export default {
   name: 'Personal',
-  components: { DownloadDialog, CollectTime, CollectShopCard },
+  components: { CompletePayment, DownloadDialog, CollectTime, CollectShopCard },
   data() {
     return {
       checkAll: false,
@@ -87,13 +89,19 @@ export default {
       },
       ids: '',
       id: '',
-      record: {}
+      record: {},
+      checkPaiedIntervalId: null
     }
   },
   created() {
     this.loadAll()
   },
   methods: {
+    closeClick() {
+      if (this.checkPaiedIntervalId) {
+        clearInterval(this.checkPaiedIntervalId)
+      }
+    },
     handleCheckAllChange(val) {
       this.checkedCollectIds = val
         ? this.pageData.data.map(d => d.collect.id)
@@ -135,7 +143,6 @@ export default {
         productionId: id
       }).then(res => {
         if (res.code === 1000) {
-          console.log(res)
           this.$message.success('已取消收藏')
           this.fixedCollect()
         }
@@ -146,14 +153,56 @@ export default {
       this.$api.user.userDownloadRecord({ productionId: id }).then(res => {
         if (res.code === 1000) {
           this.record = res.data
-          console.log(this.record.isCan)
           if (this.record.isCan === 0) {
+            this.userOrderSubmit(id)
             this.downloadDialogClick()
           } else {
-            window.open(this.record.url)
+            this.down(this.record.url)
           }
         }
       })
+    },
+    // 详情-用户购买订单
+    userOrderSubmit(id) {
+      this.$api.user.userOrderSubmit({
+        orderType: 4,
+        payment: 1,
+        productionId: id
+      }).then(res => {
+        if (res.code === 1000) {
+          this.$refs.downloadDialog.qrCode = res.data.qrCode
+          this.$refs.downloadDialog.price = res.data.price
+          this.checkPaied(res.data.orderCode, res.data.productionId)
+        }
+      })
+    },
+    // 查询交易是否成功
+    checkPaied(orderCode, id) {
+      if (this.checkPaiedIntervalId) {
+        clearInterval(this.checkPaiedIntervalId)
+      }
+      this.checkPaiedIntervalId = setInterval(() => {
+        this.$api.user.queryOrder({ orderCode }).then(res => {
+          if (res.code === 1000 && res.data != null) {
+            clearInterval(this.checkPaiedIntervalId)
+            this.$refs.downloadDialog.dialogVisible = false
+            this.$refs.paymentDialog.dialogFormVisible = true
+            this.$refs.paymentDialog.id = id
+          }
+        })
+      }, 1000)
+    },
+    down(url) {
+      const link = document.createElement('a')
+      link.style.display = 'none'
+      link.href = url
+
+      document.body.appendChild(link)
+      link.click()
+      // 释放URL对象所占资源
+      window.URL.revokeObjectURL(url)
+      // 用完即删
+      document.body.removeChild(link)
     },
     // 下载充会员
     downloadDialogClick() {

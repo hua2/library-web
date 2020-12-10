@@ -112,7 +112,6 @@ export default {
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
       this.imageFile = file.raw
-      console.log(this.imageFile)
     },
     beforeUpload(file) {
       const isImage = file.type.startsWith('image/')

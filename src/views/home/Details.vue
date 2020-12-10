@@ -46,8 +46,7 @@
         </el-button>
         <el-button type="primary" class="btn" icon="el-icon-download" @click="downloadClick(details.id)">
           图片下载
-          <a :href="record.url" :download="record.url">
-          </a></el-button>
+        </el-button>
       </div>
     </div>
     <div class="details-keywords">
@@ -60,15 +59,17 @@
       <h3>版权声明</h3>
       <p>本网站图片、视频、音乐、设计、字体等版权作品（公关宣传类作品、公共领域作品及特殊设计加工类作品等除外）， 均由本网站或版权所有人授权本网站发布，本网站有权提供版权授权使用许可。如您需将版权作品用于包括但不限于公开媒介发布、 设计、展示、推广及其他等用途，请联系本网站签订协议，支付版权许可使用费。需授权许可的场景包括但不限于社交网络媒体（微博、微信公众号）、 网站、APP、书籍、报纸、期刊、电视节目、电影作品、展览、装修装饰、 包装设计、广告、公关活动、宣传图册、PPT演示等。 如您未经授权许可使用本网站的版权作品，则存在侵犯版权的法律风险，将依法承担法律责任。</p>
     </div>
-    <DownloadDialog ref="downloadDialog" />
+    <DownloadDialog ref="downloadDialog" @close="closeClick" />
+    <CompletePayment ref="paymentDialog" @pay="downloadClick" />
   </div>
 </template>
 
 <script>
 import DownloadDialog from '@/views/home/dialog/DownloadDialog'
+import CompletePayment from '@/views/home/dialog/CompletePayment'
 export default {
   name: 'Details',
-  components: { DownloadDialog },
+  components: { CompletePayment, DownloadDialog },
   data() {
     return {
       id: '',
@@ -77,7 +78,8 @@ export default {
         isCan: 0,
         url: ''
       },
-      keyWords: ''
+      keyWords: '',
+      checkPaiedIntervalId: null
     }
   },
   created() {
@@ -86,11 +88,20 @@ export default {
       this.getDetail()
     }
   },
+  beforeDestroy() {
+    if (this.checkPaiedIntervalId) {
+      clearInterval(this.checkPaiedIntervalId)
+    }
+  },
   methods: {
+    closeClick() {
+      if (this.checkPaiedIntervalId) {
+        clearInterval(this.checkPaiedIntervalId)
+      }
+    },
     // 下载充会员
     downloadDialogClick() {
       this.$refs.downloadDialog.dialogVisible = true
-      this.$refs.downloadDialog.productMember()
     },
     searchClick(word) {
       this.$router.push({
@@ -120,7 +131,7 @@ export default {
       const link = document.createElement('a')
       link.style.display = 'none'
       link.href = url
-      link.setAttribute('download', url)
+      // link.setAttribute('download', url)
 
       document.body.appendChild(link)
       link.click()
@@ -134,6 +145,7 @@ export default {
         if (res.code === 1000) {
           this.record = res.data
           if (this.record.isCan === 0) {
+            this.userOrderSubmit(id)
             this.downloadDialogClick()
           } else {
             this.down(this.record.url)
@@ -141,19 +153,37 @@ export default {
         }
       })
     },
-    download(data) {
-      if (!data) {
-        return
-      }
-      const url = window.URL.createObjectURL(new Blob([data]))
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      link.href = url
-      link.setAttribute('download', 'excel.xlsx')
-
-      document.body.appendChild(link)
-      link.click()
+    // 详情-用户购买订单
+    userOrderSubmit(id) {
+      this.$api.user.userOrderSubmit({
+        orderType: 4,
+        payment: 1,
+        productionId: id
+      }).then(res => {
+        if (res.code === 1000) {
+          this.$refs.downloadDialog.qrCode = res.data.qrCode
+          this.$refs.downloadDialog.price = res.data.price
+          this.checkPaied(res.data.orderCode, res.data.productionId)
+        }
+      })
     },
+    // 查询交易是否成功
+    checkPaied(orderCode, id) {
+      if (this.checkPaiedIntervalId) {
+        clearInterval(this.checkPaiedIntervalId)
+      }
+      this.checkPaiedIntervalId = setInterval(() => {
+        this.$api.user.queryOrder({ orderCode }).then(res => {
+          if (res.code === 1000 && res.data != null) {
+            clearInterval(this.checkPaiedIntervalId)
+            this.$refs.downloadDialog.dialogVisible = false
+            this.$refs.paymentDialog.dialogFormVisible = true
+            this.$refs.paymentDialog.id = id
+          }
+        })
+      }, 1000)
+    },
+    // 获取图片详情
     getDetail() {
       this.$api.user.getDetail({ id: this.id }).then(res => {
         if (res.code === 1000) {

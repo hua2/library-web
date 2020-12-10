@@ -98,7 +98,6 @@ export default {
   },
   methods: {
     checkPermission(permission) {
-      console.log('permission', permission)
       if (permission && permission instanceof Array && permission.length > 0) {
         const roles = ['user']
         if (this.account.authStatus === 1) {
