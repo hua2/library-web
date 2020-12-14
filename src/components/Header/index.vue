@@ -89,14 +89,14 @@ export default {
   },
   methods: {
     authClick() {
-      if (this.account.authStatus === 1) {
+      if (this.account.authStatus === 0) {
         this.$router.push('/attest/index')
       } else if (this.account.authStatus === 3) {
         this.$router.push('/attest/underReview')
       } else if (this.account.authStatus === 4) {
         this.$router.push('/attest/refuseStatus')
       } else {
-        this.$router.push('/attest/index')
+        this.$router.push('/publish/index')
       }
     },
     // 退出登录

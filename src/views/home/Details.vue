@@ -199,20 +199,20 @@ export default {
 .details{
   width: 100%;
   .details-contain {
-    padding: 8px;
     .d-c-left {
       width: 68%;
       display: flex;
       justify-content: center;
       img {
         width: 100%;
-        height: 500px;
+        //height: 500px;
+        max-height: 500px;
         object-fit: cover;
       }
     }
     .d-c-right {
       width: 32%;
-      padding: 72px 16px 16px;
+      padding-left: 24px;
       p {
         font-size: 12px;
         line-height: 1.6;
@@ -247,6 +247,7 @@ export default {
   .details-keywords {
     height: fit-content;
     padding: 8px;
+    margin-top: 24px;
     background: #fafafa;
     .d-k-word {
       height: 34px;

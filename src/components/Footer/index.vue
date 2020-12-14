@@ -46,7 +46,7 @@ export default {
     }
   }
   .footer-nav {
-    width: 1280px;
+    max-width: 1280px;
     margin: 0 auto;
     font-size: 16px;
     p{

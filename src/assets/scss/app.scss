@@ -190,3 +190,43 @@
   margin-bottom: 24px;
 }
 
+//适配
+@media screen and (max-width: 1279px){
+  //#app .search-common{
+  //  .el-input{
+  //    width: 80%;
+  //  }
+  //}
+  #app .home .home-content{
+    justify-content: center;
+    .h-c-pic{
+      margin-left: 15px;
+      margin-right: 15px;
+      width: 500px;
+    }
+    .h-c-more{
+     width: 80%;
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  #app .home .search{
+    display: flex;
+    justify-content: center;
+    .el-input{
+      width: 80%;
+    }
+  }
+  #app .home .home-content .h-c-pic img{
+    height: 320px;
+  }
+  #app .details .details-contain {
+    .d-c-left{
+      width: 60%;
+    }
+    .d-c-right{
+      width: 40%;
+    }
+  }
+}
+

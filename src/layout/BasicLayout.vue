@@ -21,9 +21,10 @@ export default {
 .basic-layout {
   width: 100%;
   .contain {
-    width: 1280px;
+    max-width: 1280px;
     height: fit-content;
     margin: 0 auto;
+    padding: 8px;
   }
 }
 </style>

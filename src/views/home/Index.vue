@@ -1,8 +1,10 @@
 <template>
   <div class="home">
-    <el-input v-model="keyWords" placeholder="搜索图片……">
-      <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
-    </el-input>
+    <div class="search">
+      <el-input v-model="keyWords" placeholder="搜索图片……">
+        <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
+      </el-input>
+    </div>
     <div v-loading="loading" class="home-content">
       <div v-for="(i,index) in moreData" :key="index" class="h-c-pic" @click="goToDisplay(i.id)">
         <img :src="i.image" alt="">
@@ -11,7 +13,7 @@
           <div class="h-c-line" />
         </div>
       </div>
-      <div class="w-full h-c-more" @click="moreClick">更多 >></div>
+      <div class="h-c-more" @click="moreClick">更多 >></div>
       <div class="w-full h-c-title">
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
         <div class="h-c-join flex">
@@ -85,6 +87,9 @@ export default {
 <style scoped lang="scss">
 .home {
   width: 100%;
+  .search{
+    width: 100%;
+  }
   .home-content {
     width: 100%;
     display: flex;
@@ -99,6 +104,7 @@ export default {
         height: 384px;
         object-fit: cover;
         cursor: pointer;
+        border-radius: 4px;
       }
 
       .h-c-title {
@@ -127,6 +133,7 @@ export default {
     }
 
     .h-c-more {
+      width: 100%;
       font-size: 22px;
       color: #DA534D;
       cursor: pointer;
