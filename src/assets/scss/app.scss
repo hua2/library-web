@@ -1,6 +1,7 @@
 .content{
-  width: 1144px;
-  min-width: 1144px;
+  //width: 1144px;
+  //min-width: 1144px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 .user-avatar{
@@ -192,11 +193,6 @@
 
 //适配
 @media screen and (max-width: 1279px){
-  //#app .search-common{
-  //  .el-input{
-  //    width: 80%;
-  //  }
-  //}
   #app .home .home-content{
     justify-content: center;
     .h-c-pic{

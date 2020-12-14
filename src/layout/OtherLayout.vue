@@ -19,7 +19,7 @@ export default {
 
 <style scoped lang="scss">
 .other-layout {
-  min-width: 1144px;
+  min-width: 1280px;
   .content {
     width: 100%;
   }

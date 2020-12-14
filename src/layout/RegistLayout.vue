@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 .regist-layout {
-  min-width: 1144px;
+  min-width: 1280px;
   height: 1024px;
   .regist-header {
     width: 1144px;

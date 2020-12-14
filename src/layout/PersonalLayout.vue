@@ -136,10 +136,11 @@ export default {
 
 <style scoped lang="scss">
 .personal-layout {
-  min-width: 1144px;
+  min-width: 1280px;
   .p-l-search{
     width: 1144px;
     margin: 24px auto;
+    padding: 0 8px;
     .el-input{
       width: 902px;
     }
@@ -162,6 +163,7 @@ export default {
   .p-l-left {
     width: 1144px;
     margin: 32px auto 0 auto;
+    padding: 0 8px;
     .p-l-l-nav {
       width: 184px;
       height: fit-content;

@@ -88,7 +88,7 @@
         <!--        </a>-->
         <a
           href="javascript:"
-          class="flex items-center relative mr-32 pr-16"
+          class="flex items-center relative pr-16"
           @click="authClick"
         >
           <i class="el-icon-upload"></i>

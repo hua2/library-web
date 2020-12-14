@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .login-layout {
-  min-width: 1144px;
+  min-width: 1280px;
   height: 1024px;
   .login-header {
     width: 1144px;
