@@ -61,6 +61,7 @@ import CollectShopCard from '@/views/personal/components/CollectShopCard'
 import CollectTime from '@/views/personal/components/CollectTime'
 import DownloadDialog from '@/views/home/dialog/DownloadDialog'
 import CompletePayment from '@/views/home/dialog/CompletePayment'
+import { down } from '@/utils/utils'
 /**
  * 个人中心-收藏记录模块
  * @author lyh
@@ -157,7 +158,7 @@ export default {
             this.userOrderSubmit(id)
             this.downloadDialogClick()
           } else {
-            this.down(this.record.url)
+            down(this.record.url)
           }
         }
       })
@@ -191,18 +192,6 @@ export default {
           }
         })
       }, 1000)
-    },
-    down(url) {
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      link.href = url
-
-      document.body.appendChild(link)
-      link.click()
-      // 释放URL对象所占资源
-      window.URL.revokeObjectURL(url)
-      // 用完即删
-      document.body.removeChild(link)
     },
     // 下载充会员
     downloadDialogClick() {

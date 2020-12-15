@@ -85,6 +85,7 @@
  * @author lyh
  * @date 2020-11-19
  */
+import { down } from '@/utils/utils'
 export default {
   name: 'Download',
   data() {
@@ -113,22 +114,10 @@ export default {
         if (res.code === 1000) {
           this.record = res.data
           if (this.record.isCan === 1) {
-            this.down(this.record.url)
+            down(this.record.url)
           }
         }
       })
-    },
-    down(url) {
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      link.href = url
-
-      document.body.appendChild(link)
-      link.click()
-      // 释放URL对象所占资源
-      window.URL.revokeObjectURL(url)
-      // 用完即删
-      document.body.removeChild(link)
     },
     search() {
       this.downloadData.pageNumber = 1

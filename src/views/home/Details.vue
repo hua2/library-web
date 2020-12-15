@@ -67,6 +67,7 @@
 <script>
 import DownloadDialog from '@/views/home/dialog/DownloadDialog'
 import CompletePayment from '@/views/home/dialog/CompletePayment'
+import { down } from '@/utils/utils'
 export default {
   name: 'Details',
   components: { CompletePayment, DownloadDialog },
@@ -127,19 +128,6 @@ export default {
         }
       })
     },
-    down(url) {
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      link.href = url
-      // link.setAttribute('download', url)
-
-      document.body.appendChild(link)
-      link.click()
-      // 释放URL对象所占资源
-      window.URL.revokeObjectURL(url)
-      // 用完即删
-      document.body.removeChild(link)
-    },
     downloadClick(id) {
       this.$api.user.userDownloadRecord({ productionId: id }).then(res => {
         if (res.code === 1000) {
@@ -148,7 +136,7 @@ export default {
             this.userOrderSubmit(id)
             this.downloadDialogClick()
           } else {
-            this.down(this.record.url)
+            down(this.record.url)
           }
         }
       })

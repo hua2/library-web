@@ -37,8 +37,9 @@
             <el-upload
               class="avatar-uploader"
               :action="''"
+              :auto-upload="false"
               :show-file-list="false"
-              :on-success="handleAvatarSuccess"
+              :on-change="handleAvatarChange"
               :before-upload="beforeUpload"
             >
               <img v-if="imageUrl" :src="imageUrl" class="avatar">
@@ -109,7 +110,7 @@ export default {
         }
       })
     },
-    handleAvatarSuccess(res, file) {
+    handleAvatarChange(file) {
       console.log('123', file)
       this.imageUrl = URL.createObjectURL(file.raw)
       this.imageFile = file.raw

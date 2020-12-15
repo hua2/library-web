@@ -97,7 +97,6 @@ export default {
         ps: this.productData.pageSize
       }).then(res => {
         this.loading = false
-        console.log('this.123', this.keyWords)
         if (res.code === 1000) {
           this.productData = res.data
           this.keyWords = ''
