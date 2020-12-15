@@ -24,7 +24,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="关键词：" class="is-required">
-            <el-input v-model="form.keyWords" placeholder="多关键词用,分开。搜索使用"></el-input>
+            <el-input v-model="form.keyWords" placeholder="请输入关键词"></el-input>
           </el-form-item>
           <el-form-item label="软著：" class="is-required">
             <el-radio v-model="form.copyright" :label="0">否</el-radio>
@@ -44,7 +44,6 @@
               <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
-
           </el-form-item>
           <el-form-item label="图片概述：" class="is-required">
             <el-input v-model="form.introduce" type="textarea" :rows="8" placeholder="请输入..."></el-input>
@@ -53,6 +52,7 @@
             <el-button
               type="primary"
               size="medium"
+              :disabled="form.name === ''||form.columnId===''||form.keyWords===''||form.explain===''||form.introduce===''||imageUrl===''"
               @click="publishSingle"
             >发布</el-button>
           </div>
@@ -110,8 +110,10 @@ export default {
       })
     },
     handleAvatarSuccess(res, file) {
+      console.log('123', file)
       this.imageUrl = URL.createObjectURL(file.raw)
       this.imageFile = file.raw
+      console.log(this.imageFile)
     },
     beforeUpload(file) {
       const isImage = file.type.startsWith('image/')

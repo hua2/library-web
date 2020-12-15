@@ -5,95 +5,37 @@
         <MainLogo />
       </div>
       <div class="m-h-right flex items-center">
-        <div
-          class="flex items-center mr-30"
-          :class="!account.mobile ? 'm-h-r-avatar' : 'm-h-r-status'"
-        >
-          <img
-            v-if="account.headPic"
-            class="user-avatar"
-            :src="account.headPic"
-            alt=""
-          />
-          <img
-            v-else
-            class="user-avatar"
-            src="../../assets/img/default-avatar.png"
-            alt=""
-          />
-          <template v-if="!account.mobile">
-            <a
-              href="javascript:"
-              class="ml-14"
-              @click="$router.push('/login/index')"
-            >登录</a>
-            <a
-              href="javascript:"
-              class="ml-12"
-              @click="$router.push('/regist/index')"
-            >注册</a>
-          </template>
-          <a v-else href="javascript:" class="ml-14 truncate">{{
-            account.nickname ? account.nickname : account.nickname
-          }}</a>
-          <img
-            v-if="account.mobile"
-            src="../../assets/img/arrow-down.png"
-            alt=""
-            class="m-h-r-arrow"
-          />
-          <div v-if="account.mobile" class="m-h-r-hover text-12">
-            <div class="m-h-r-info mb-12">
-              <a
-                href="javascript:"
-                class="mr-48"
-                @click="$router.push('/personal/account')"
-              >账户信息</a>
-            </div>
-            <div class="m-h-r-info mb-12">
-              <a
-                href="javascript:"
-                class="mr-48"
-                @click="$router.push('/personal/updatePwd')"
-              >修改密码</a>
-            </div>
-            <div class="m-h-r-info flex" @click="exitLogout">
-              <img
-                src="../../assets/img/user-exit-icon.png"
-                alt=""
-                class="ml-24 mr-8"
-              />
-              退出
-            </div>
-          </div>
-        </div>
-        <a
-          href="javascript:"
-          class="flex items-center relative mr-32 pr-16"
-        >
-          <el-menu class="el-menu-demo" mode="horizontal">
-            <el-submenu index="1">
-              <template slot="title">图片</template>
-              <el-menu-item v-for="(h,index) in hideData" :key="index" index="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
+        <el-menu class="el-menu-demo" mode="horizontal">
+          <template v-if="account.mobile">
+            <el-submenu index="1" class="h-sub">
+              <template slot="title">
+                <img
+                  v-if="account.headPic"
+                  class="user-avatar"
+                  :src="account.headPic"
+                  alt=""
+                />
+                <img
+                  v-else
+                  class="user-avatar"
+                  src="../../assets/img/default-avatar.png"
+                  alt=""
+                />
+                <span class="truncate">{{ account.nickname ? account.nickname : account.mobile }}</span>
+              </template>
+              <el-menu-item index="2-1" @click="$router.push('/personal/index')">个人信息</el-menu-item>
+              <el-menu-item index="2-2" @click="$router.push('/personal/account')">账户信息</el-menu-item>
+              <el-menu-item index="2-3" @click="$router.push('/personal/updatePwd')">修改密码</el-menu-item>
+              <el-menu-item index="2-3" @click="exitLogout">退出</el-menu-item>
             </el-submenu>
-          </el-menu>
-        </a>
-        <!--        <a-->
-        <!--          href="javascript:"-->
-        <!--          class="flex items-center relative mr-32 pr-16"-->
-        <!--          @click="$router.push('')"-->
-        <!--        >-->
-        <!--          <i class="el-icon-s-opportunity"></i>-->
-        <!--          <span>人物</span>-->
-        <!--        </a>-->
-        <a
-          href="javascript:"
-          class="flex items-center relative pr-16"
-          @click="authClick"
-        >
-          <i class="el-icon-upload"></i>
-          <span>供图</span>
-        </a>
+          </template>
+          <el-submenu index="2">
+            <template slot="title">图片</template>
+            <el-menu-item v-for="(h,index) in hideData" :key="index" index="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
+          </el-submenu>
+          <!--          <el-menu-item index="3"> <i class="el-icon-menu"></i>人物</el-menu-item>-->
+          <el-menu-item index="4" @click="authClick"> <i class="el-icon-upload"></i>供图</el-menu-item>
+        </el-menu>
       </div>
     </div>
   </div>
@@ -161,6 +103,8 @@ export default {
     .el-menu--horizontal > .el-submenu .el-submenu__title{
       color: #ffffff;
       font-size: 14px;
+      display: flex;
+      align-items: center;
     }
     .el-menu--horizontal > .el-submenu .el-submenu__title:hover{
       background-color: transparent;
@@ -177,49 +121,48 @@ export default {
   }
   .m-h-right {
     width: fit-content;
-    .m-h-r-avatar {
-      width: fit-content;
+    span{
+      width: 88px;
+      margin-left: 8px;
     }
-    .m-h-r-status {
-      position: relative;
-      padding: 0 20px;
-      max-width: 192px;
-      .m-h-r-arrow {
-        width: 15px;
-        height: 10px;
-        margin-left: 8px;
+    .el-menu{
+      background-color: transparent;
+      border: unset;
+    }
+    .el-menu-item{
+      color: #ffffff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .el-menu-item [class^="el-icon-"]{
+      color: #ffffff;
+      //&:hover{
+      //  color: #909399;
+      //}
+    }
+    .el-menu-item:hover, .el-menu-item:focus{
+      color: #909399;
+      background-color: transparent;
+    }
+    .el-menu--horizontal > .el-menu-item{
+      border: unset;
+      &.is-active{
+        border: unset;
       }
-      .m-h-r-hover {
-        display: none;
-        width: 192px;
-        height: fit-content;
-        position: absolute;
-        padding: 14px 0 14px 36px;
-        top: 64px;
-        z-index: 2001;
-        cursor: pointer;
+    }
+    /deep/{
+      .el-submenu .el-submenu__title{
         color: #ffffff;
-        background: rgba(45, 45, 45, 1);
-        img {
-          width: 20px;
-          height: 20px;
-        }
-        .m-h-r-info {
-          height: 20px;
-          line-height: 20px;
-         text-align: center;
-        }
+        font-size: 16px;
       }
-    }
-    .m-h-r-status {
-      &:hover {
-        height: 64px;
-        background: #2d2d2d;
-        .m-h-r-hover {
-          display: block;
-          left: 0;
-          top: 64px;
-        }
+      .el-submenu__title:hover{
+        color: #909399;
+        background: transparent;
+      }
+      .el-submenu__icon-arrow{
+        right: 4px;
+        font-size: 16px;
       }
     }
   }

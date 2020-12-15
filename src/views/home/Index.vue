@@ -7,7 +7,7 @@
     </div>
     <div v-loading="loading" class="home-content">
       <div v-for="(i,index) in moreData" :key="index" class="h-c-pic" @click="goToDisplay(i.id)">
-        <img :src="i.image" alt="">
+        <img :src="i.image + '?x-oss-process=image/quality,q_55'" alt="">
         <div class="h-c-title">
           <h2>{{ i.title }}</h2>
           <div class="h-c-line" />

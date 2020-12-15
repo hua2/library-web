@@ -70,7 +70,7 @@
 /**
  * 个人中心-个人信息模块
  * @author lyh
- * @date 2019-07-09
+ * @date 2020-12-09
  */
 import PersonalHeader from '@/components/PersonalHeader/index'
 import store from '@/store'

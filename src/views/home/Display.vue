@@ -70,10 +70,7 @@ export default {
   created() {
     this.keyWords = this.$route.query.word
     this.columnId = this.$route.query.id
-    if (this.keyWords) {
-      this.loadAll()
-    }
-    if (this.columnId) {
+    if (this.keyWords || this.columnId) {
       this.loadAll()
     }
   },
@@ -81,7 +78,7 @@ export default {
     searchClick(word) {
       this.$router.push({
         path: '/home/display',
-        query: { word: word }
+        query: { word: word, id: this.columnId || '' }
       })
     },
     openLink(id) {
@@ -93,14 +90,18 @@ export default {
     loadAll() {
       this.loading = true
       this.$api.user.indexProduct({
-        columnId: this.columnId,
-        keyWords: this.keyWords,
-        pageNumber: this.productData.pageNumber,
-        pageSize: this.productData.pageSize
+        ci: this.columnId || '',
+        psort: 0,
+        keyword: this.keyWords || '',
+        pn: this.productData.pageNumber,
+        ps: this.productData.pageSize
       }).then(res => {
         this.loading = false
+        console.log('this.123', this.keyWords)
         if (res.code === 1000) {
           this.productData = res.data
+          this.keyWords = ''
+          console.log('this.keyWords', this.keyWords)
         }
       })
     },

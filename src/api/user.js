@@ -133,7 +133,7 @@ const user = {
   },
   // 图片查询首页
   indexProduct(params) {
-    return axios.get(`/production/index`, { params: params })
+    return axios.get(`/production/search`, { params: params })
   },
   // 用户图片收藏
   userCollect(params) {

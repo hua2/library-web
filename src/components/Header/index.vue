@@ -22,13 +22,10 @@
               <template slot="title">图片</template>
               <el-menu-item v-for="(h,index) in hideData" :key="index" index="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
             </el-submenu>
-            <!--            <el-menu-item index="2">人物</el-menu-item>-->
+            <!--            <el-menu-item index="2"> <i class="el-icon-menu"></i>人物</el-menu-item>-->
           </div>
           <div class="flex">
-            <el-menu-item index="3">
-              <template slot="title">供图
-                <i class="el-icon-upload"></i></template>
-            </el-menu-item>
+            <el-menu-item index="3" @click="authClick"> <i class="el-icon-upload"></i>供图</el-menu-item>
             <template v-if="!account.mobile">
               <el-menu-item index="4">
                 <a
@@ -162,10 +159,21 @@ export default {
     .el-menu-item{
       color: #ffffff;
       font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .el-menu-item [class^="el-icon-"]{
+      color: #ffffff;
     }
     .el-menu-item:hover, .el-menu-item:focus{
-      color: #f84949;
+      color: #909399;
       background-color: transparent;
+    }
+    .el-menu--horizontal > .el-menu-item{
+      border: unset;
+      &.is-active{
+        border: unset;
+      }
     }
     /deep/{
       .el-submenu .el-submenu__title{
@@ -173,7 +181,7 @@ export default {
         font-size: 16px;
       }
       .el-submenu__title:hover{
-        color: #f84949;
+        color: #909399;
         background: transparent;
       }
       .el-submenu__icon-arrow{

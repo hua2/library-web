@@ -6,7 +6,7 @@
     <div class="details-contain flex items-center">
       <div class="d-c-left">
         <img
-          :src="details.watermarkImage"
+          :src="details.watermarkImage + '?x-oss-process=image/quality,q_55'"
           alt=""
         />
       </div>
