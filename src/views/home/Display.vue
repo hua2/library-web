@@ -29,7 +29,9 @@
           </div>
         </div>
       </div>
-      <p v-else>暂无数据</p>
+      <div v-else class="text-center mt-48">
+        <p style="color: #9d9fa6">暂无数据</p>
+      </div>
       <el-pagination
         background
         layout="prev, pager, next"

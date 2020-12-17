@@ -48,7 +48,7 @@
               我同意<a
                 href="javascript:"
                 @click="serviceDialogClick"
-              >《角马供应链用户服务条款》</a>
+              >《能源图库用户服务条款》</a>
             </el-checkbox>
             <el-checkbox
               v-model="remember"

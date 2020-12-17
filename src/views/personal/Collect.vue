@@ -10,37 +10,41 @@
       <span class="text-12 cursor-pointer" @click="cancelCollect">删除</span>
     </div>
     <div v-loading="loading" class="collect-list">
-      <el-checkbox-group
-        v-model="checkedCollectIds"
-        class="flex mt-8 flex-wrap"
-        @change="handleCheckedCollectIdsChange"
-      >
-        <div
-          v-for="(spu, index) in pageData.data"
-          :key="index"
-          class="relative c-l-card"
+      <template v-if="pageData.data.length > 0">
+        <el-checkbox-group
+          v-model="checkedCollectIds"
+          class="flex mt-8 flex-wrap"
+          @change="handleCheckedCollectIdsChange"
         >
-          <a
-            v-if="spu.status === '1'"
-            class="c-l-disable"
-            href="#"
-          ></a>
-          <CollectShopCard
-            :title="spu.collect.name"
-            :img="spu.collect.watermarkImage"
-            @link="openLink(spu.collect.id)"
-            @collect="collectClick(spu.collect.id)"
-            @download="downloadClick(spu.collect.id)"
-          />
-          <el-checkbox
-            v-if="spu.status === '1'"
-          >&nbsp;</el-checkbox>
-          <el-checkbox
-            v-if="spu.status === '0'"
-            :label="spu.collect.id"
-          >&nbsp;</el-checkbox>
-        </div>
-      </el-checkbox-group>
+
+          <div
+            v-for="(spu, index) in pageData.data"
+            :key="index"
+            class="relative c-l-card"
+          >
+            <div
+              v-if="spu.status === '1'"
+              class="c-l-disable"
+            ></div>
+            <CollectShopCard
+              :title="spu.collect.name"
+              :img="spu.collect.watermarkImage"
+              @link="openLink(spu.collect.id)"
+              @collect="collectClick(spu.collect.id)"
+              @download="downloadClick(spu.collect.id)"
+            />
+            <!--          <el-checkbox-->
+            <!--            v-if="spu.status === '1'"-->
+            <!--          >&nbsp;</el-checkbox>-->
+            <el-checkbox
+              :label="spu.collect.id"
+            >&nbsp;</el-checkbox>
+          </div>
+        </el-checkbox-group>
+      </template>
+      <div v-else class="text-center mt-48">
+        <p style="color: #9d9fa6">暂无数据</p>
+      </div>
     </div>
     <el-pagination
       background
@@ -219,9 +223,11 @@ export default {
         searchMethod = 'cancelCollect'
         const id = this.checkedCollectIds.toString()
         this.id = id
+        console.log('this.id', this.id)
       } else {
         const ids = this.checkedCollectIds.toString()
         this.ids = ids
+        console.log('this.ids', this.ids)
       }
       this.$api.user[searchMethod]({
         productionId: this.id,

@@ -73,8 +73,8 @@
           <el-checkbox v-model="agree">
             我已阅读并同意<a
               href="javascript:"
-              @click="serviceDialogClick"
-            >《角马供应链用户服务条款》</a>
+              @click="registrationClick"
+            >《能源图库用户注册协议 》</a>
           </el-checkbox>
         </el-form-item>
         <el-form-item class="text-center">
@@ -92,7 +92,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <ServiceDialog ref="serviceDialog" />
+    <RegistrationDialog ref="registrationDialog" />
   </div>
 </template>
 
@@ -103,10 +103,10 @@
  * @date 2019-07-10
  */
 import ErrorMessage from '@/components/ErrorMessage/index'
-import ServiceDialog from '@/views/other/dialog/ServiceDialog'
+import RegistrationDialog from '@/views/other/dialog/RegistrationDialog'
 export default {
   name: 'Regist',
-  components: { ServiceDialog, ErrorMessage },
+  components: { RegistrationDialog, ErrorMessage },
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -149,8 +149,8 @@ export default {
   },
   methods: {
     // 服务条款
-    serviceDialogClick() {
-      this.$refs.serviceDialog.dialogVisible = true
+    registrationClick() {
+      this.$refs.registrationDialog.dialogVisible = true
     },
     getMobileIdentifyCode() {
       this.$api.user
