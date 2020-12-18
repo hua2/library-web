@@ -18,10 +18,10 @@
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
         <div class="h-c-join flex">
           <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">
+          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">
+          <img src="https://alifei02.cfp.cn/cms/image/image/24e42a2844f545cda08da74a7ea24cf1.jpg?x-oss-process=image/format,webp" alt="">
+          <img src="https://alifei02.cfp.cn/cms/image/image/54f312018b054f0baac9090a2d90d9ad.jpg?x-oss-process=image/format,webp" alt="">
+          <img src="https://goss.cfp.cn/static/home/h2_6.png?x-oss-process=image/format,webp" alt="">
         </div>
       </div>
     </div>
