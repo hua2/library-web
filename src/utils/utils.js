@@ -1,5 +1,4 @@
 export function down(url) {
-  console.log('download url ', url)
   const link = document.createElement('a')
   link.style.display = 'none'
   link.href = url
