@@ -57,7 +57,7 @@
 /**
  * 登录-重设密码模块
  * @author lyh
- * @date 2019-07-09
+ * @date 2020-12-09
  */
 export default {
   name: 'ForgetPwd',

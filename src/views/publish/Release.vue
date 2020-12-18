@@ -8,6 +8,7 @@
           </el-form-item>
           <el-form-item label="状态：">
             <el-select v-model="form.searchState">
+              <el-option label="全部" value=""></el-option>
               <el-option label="已上架" :value="1"></el-option>
               <el-option label="已下架" :value="2"></el-option>
               <el-option label="待审核" :value="3"></el-option>
@@ -228,6 +229,7 @@ export default {
           this.isLoading = false
           if (res.code === 1000) {
             this.search()
+            this.$message.success(res.msg)
           }
         })
       })

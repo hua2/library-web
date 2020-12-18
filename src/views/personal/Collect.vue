@@ -211,7 +211,7 @@ export default {
     cancelCollect() {
       if (this.checkedCollectIds.length === 0) {
         this.$message({
-          duration: 1500,
+          duration: 1000,
           message: '请先选中要删除的商品！',
           type: 'warning'
         })
@@ -223,11 +223,9 @@ export default {
         searchMethod = 'cancelCollect'
         const id = this.checkedCollectIds.toString()
         this.id = id
-        console.log('this.id', this.id)
       } else {
         const ids = this.checkedCollectIds.toString()
         this.ids = ids
-        console.log('this.ids', this.ids)
       }
       this.$api.user[searchMethod]({
         productionId: this.id,
@@ -237,6 +235,7 @@ export default {
           this.loading = false
           if (res.code === 1000) {
             this.fixedCollect()
+            this.$message.success(res.msg)
           }
         })
     },

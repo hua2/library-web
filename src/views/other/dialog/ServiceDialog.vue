@@ -176,7 +176,7 @@
 /**
  * 登录-注册(服务条款)模块
  * @author lyh
- * @date 2019-12-06
+ * @date 2020-12-06
  */
 export default {
   name: 'ServiceDialog',

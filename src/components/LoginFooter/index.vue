@@ -58,7 +58,7 @@
 /**
  * footer通用模块
  * @author lyh
- * @date 2019-11-27
+ * @date 2020-11-17
  */
 export default {
   name: 'LoginFooter'

@@ -6,7 +6,7 @@
 /**
  * header-logo模块
  * @author lyh
- * @date 2019-07-08
+ * @date 2020-12-08
  */
 export default {
   name: 'Logo',

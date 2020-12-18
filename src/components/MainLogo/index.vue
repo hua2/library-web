@@ -6,7 +6,7 @@
 /**
  *main-logo( mainLayout,personalLayout)模块
  * @author lyh
- * @date 2019-08-01
+ * @date 2020-12-01
  */
 export default {
   name: 'MainLogo',

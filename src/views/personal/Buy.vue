@@ -4,7 +4,7 @@
       <el-form :inline="true" :model="form" size="small" label-width="72px">
         <div class="flex justify-between">
           <el-form-item label="图片ID：">
-            <el-input v-model="form.keyWords"></el-input>
+            <el-input v-model="form.keyWords" clearable></el-input>
           </el-form-item>
           <el-form-item label="交易日期：">
             <el-date-picker

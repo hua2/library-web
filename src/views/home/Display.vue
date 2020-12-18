@@ -102,7 +102,6 @@ export default {
         if (res.code === 1000) {
           this.productData = res.data
           this.keyWords = ''
-          console.log('this.keyWords', this.keyWords)
         }
       })
     },

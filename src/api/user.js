@@ -1,7 +1,7 @@
 /**
  * user模块接口列表
  * @author lyh
- * @date 2019-07-08
+ * @date 2020-12-08
  */
 
 import axios from '@/utils/request' // 导入http中创建的axios实例

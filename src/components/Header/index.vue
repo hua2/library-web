@@ -22,7 +22,7 @@
               <template slot="title">图片</template>
               <el-menu-item v-for="(h,index) in hideData" :key="index" index="index" @click="picLink(h.id)">{{ h.title }}</el-menu-item>
             </el-submenu>
-            <!--            <el-menu-item index="2"> <i class="el-icon-menu"></i>人物</el-menu-item>-->
+            <el-menu-item index="2" @click="picLink(23)"> <i class="el-icon-menu"></i>人物</el-menu-item>
           </div>
           <div class="flex">
             <el-menu-item index="3" @click="authClick"> <i class="el-icon-upload"></i>供图</el-menu-item>

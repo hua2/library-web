@@ -9,7 +9,7 @@
 /**
  * 404
  * @author lyh
- * @date 2019-12-11
+ * @date 2020-12-11
  */
 export default {
   name: '404'
