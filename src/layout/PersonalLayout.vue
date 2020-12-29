@@ -2,7 +2,7 @@
   <div class="personal-layout">
     <MainHeader />
     <div class="p-l-search flex justify-between">
-      <el-input v-model="keyWords" placeholder="搜索图片……">
+      <el-input v-model="keyWords" placeholder="搜索图片……" @keyup.enter.native="searchEnter">
         <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
       </el-input>
       <div class="p-l-attest flex">
@@ -129,6 +129,16 @@ export default {
       }
       this.active = link
       this.$router.push(link)
+    },
+    // 回车搜索
+    searchEnter(e) {
+      const keyCode = window.event ? e.keyCode : e.which
+      if (keyCode === 13 && this.keyWords) {
+        this.$router.push({
+          path: '/home/display',
+          query: { word: this.keyWords }
+        })
+      }
     },
     searchClick(word) {
       this.$router.push({

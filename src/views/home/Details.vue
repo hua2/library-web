@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <el-input v-model="keyWords" placeholder="搜索图片……">
+    <el-input v-model="keyWords" placeholder="搜索图片……" @keyup.enter.native="searchEnter">
       <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
     </el-input>
     <div class="details-contain flex items-center">
@@ -104,6 +104,16 @@ export default {
     downloadDialogClick() {
       this.$refs.downloadDialog.dialogVisible = true
     },
+    // 回车搜索
+    searchEnter(e) {
+      const keyCode = window.event ? e.keyCode : e.which
+      if (keyCode === 13 && this.keyWords) {
+        this.$router.push({
+          path: '/home/display',
+          query: { word: this.keyWords }
+        })
+      }
+    },
     searchClick(word) {
       this.$router.push({
         path: '/home/display',
@@ -195,7 +205,7 @@ export default {
         width: 100%;
         //height: 500px;
         max-height: 500px;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     .d-c-right {

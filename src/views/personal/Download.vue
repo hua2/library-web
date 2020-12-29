@@ -32,14 +32,14 @@
         :data="downloadData.data"
         style="width: 100%"
       >
-        <el-table-column label="素材ID" min-width="102">
-          <template slot-scope="scope">
-            {{ scope.row.object.code }}
-          </template>
-        </el-table-column>
         <el-table-column label="名称">
           <template slot-scope="scope">
             {{ scope.row.object.name }}
+          </template>
+        </el-table-column>
+        <el-table-column label="素材ID" min-width="102">
+          <template slot-scope="scope">
+            {{ scope.row.object.code }}
           </template>
         </el-table-column>
         <el-table-column label="图片">
