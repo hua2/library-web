@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <PersonalHeader text="供图认证" />
+    <PersonalHeader text="认证供图" />
     <div class="refuse">
       <img src="../../assets/img/refuse-status.png" alt="">
       <div class="r-btn" @click="$router.push('/attest/index')">

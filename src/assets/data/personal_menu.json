@@ -58,16 +58,16 @@
   },
   {
     "title": "消息",
-    "permission": ["authenticator"],
+    "permission": ["user","authenticator"],
     "children": [
       {
         "title": "系统消息",
-        "permission": ["authenticator"],
+        "permission": ["user","authenticator"],
         "link": "/personal/message"
       },
       {
         "title": "其他消息",
-        "permission": ["authenticator"],
+        "permission": ["user","authenticator"],
         "link": "/personal/otherMessage"
       }
     ]

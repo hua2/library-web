@@ -33,6 +33,11 @@ const router = new Router({
           path: 'home/details',
           component: () =>
               import(/* webpackChunkName: "home_details" */ '@/views/home/Details.vue')
+        },
+        {
+          path: 'info/about',
+          component: () =>
+              import(/* webpackChunkName: "about" */ '@/views/info/About.vue')
         }
       ]
     },
@@ -178,7 +183,8 @@ const whiteList = [
   '/login/index',
   '/login/forget-pwd',
   '/login/reset-pwd',
-  '/regist/index'
+  '/regist/index',
+  '/info/about'
 ] // no redirect whitelist
 
 router.beforeEach((to, from, next) => {

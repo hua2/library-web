@@ -44,7 +44,7 @@ export default {
         data: [],
         totalNum: 0,
         totalPage: 1,
-        pageSize: 20,
+        pageSize: 10,
         pageNumber: 1
       },
       loading: false

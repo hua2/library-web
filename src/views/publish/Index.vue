@@ -31,7 +31,7 @@
             <el-radio v-model="form.copyright" :label="1">是</el-radio>
           </el-form-item>
           <el-form-item label="版权说明：" class="is-required">
-            <el-input v-model="form.explain" placeholder="请描述版权说明"></el-input>
+            <el-input v-model="form.rightExplain" placeholder="请描述版权说明"></el-input>
           </el-form-item>
           <el-form-item label="上传：" class="p-f-upload is-required">
             <el-upload
@@ -53,7 +53,8 @@
             <el-button
               type="primary"
               size="medium"
-              :disabled="form.name === ''||form.columnId===''||form.keyWords===''||form.explain===''||form.introduce===''||imageUrl===''"
+              :loading="isLoading"
+              :disabled="form.name === ''||form.columnId===''||form.keyWords===''||form.rightExplain===''||form.introduce===''||imageUrl===''"
               @click="publishSingle"
             >发布</el-button>
           </div>
@@ -76,7 +77,7 @@ export default {
         columnId: '',
         keyWords: '',
         copyright: 0,
-        explain: '',
+        rightExplain: '',
         introduce: '',
         file: ''
       },

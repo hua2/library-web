@@ -46,12 +46,22 @@
             type="text"
             size="small"
             class="after-btn"
+            @click="dialogVisible = true"
           >
             联系客服
           </el-button>
           <!--          </template>-->
         </el-table-column>
       </el-table>
+      <el-dialog
+        title="联系客服"
+        :visible.sync="dialogVisible"
+        width="472px"
+        custom-class="c-g--dialog"
+        style="margin-top: 18vh"
+      >
+        <span>电话：010-67188377</span>
+      </el-dialog>
     </div>
     <el-pagination
       background
@@ -83,10 +93,11 @@ export default {
         data: [],
         totalNum: 0,
         totalPage: 1,
-        pageSize: 20,
+        pageSize: 10,
         pageNumber: 1
       },
-      isLoading: false
+      isLoading: false,
+      dialogVisible: false
     }
   },
   created() {
@@ -128,6 +139,27 @@ export default {
 <style scoped lang="scss">
 .download{
   width: 100%;
+  /deep/ {
+    .el-dialog {
+      border-radius: unset;
+    }
+    .el-dialog__header {
+      border-bottom: unset;
+      text-align: center;
+      padding-top: 24px;
+      .el-dialog__title{
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+    .el-dialog__body {
+      text-align: center;
+      padding: 24px 25px;
+    }
+    .el-dialog__footer {
+      padding: 16px 0 55px 0;
+    }
+  }
   .el-button{
    width: 80px;
    height: 32px;

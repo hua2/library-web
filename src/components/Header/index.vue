@@ -87,7 +87,10 @@ export default {
   methods: {
     authClick() {
       if (this.account.authStatus === 0) {
-        this.$router.push('/attest/index')
+        this.$router.push({
+          path: '/attest/index',
+          query: { status: 0 }
+        })
       } else if (this.account.authStatus === 3) {
         this.$router.push('/attest/underReview')
       } else if (this.account.authStatus === 4) {

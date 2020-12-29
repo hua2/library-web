@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <PersonalHeader text="供图认证" />
+    <PersonalHeader text="认证供图" />
     <div class="under-review">
       <img src="../../assets/img/attest-audit-icon.png" alt="" />
       <div class="u-r-btn">

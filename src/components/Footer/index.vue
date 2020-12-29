@@ -1,9 +1,8 @@
 <template>
   <div class="footer">
     <ul class="flex justify-center">
-      <li>关于我们</li>
+      <li @click="$router.push('/info/about')">关于我们</li>
       <li>授权信息</li>
-      <li>关于我们</li>
     </ul>
     <div class="footer-nav">
       <div class="text-center">

@@ -37,14 +37,14 @@
             {{ scope.row.object.code }}
           </template>
         </el-table-column>
+        <el-table-column label="名称">
+          <template slot-scope="scope">
+            {{ scope.row.object.name }}
+          </template>
+        </el-table-column>
         <el-table-column label="图片">
           <template slot-scope="scope">
             <img :src="scope.row.object.watermarkImage" alt="" class="img" />
-          </template>
-        </el-table-column>
-        <el-table-column label="供图/作者">
-          <template slot-scope="scope">
-            {{ scope.row.object.authorizationWay }}
           </template>
         </el-table-column>
         <el-table-column label="下载时间">
@@ -98,7 +98,7 @@ export default {
         data: [],
         totalNum: 0,
         totalPage: 1,
-        pageSize: 20,
+        pageSize: 10,
         pageNumber: 1
       },
       isLoading: false,

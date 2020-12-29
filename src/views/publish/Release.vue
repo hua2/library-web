@@ -145,7 +145,7 @@ export default {
         data: [],
         totalNum: 0,
         totalPage: 1,
-        pageSize: 20,
+        pageSize: 10,
         pageNumber: 1
       },
       isLoading: false
@@ -194,7 +194,7 @@ export default {
       }
       return status
     },
-    // 商品管理-sku上架下架
+    // 图片管理-上架下架
     upDownProduct(id, status) {
       this.isLoading = true
       this.$api.user.upDownProduct({ id: id, state: status }).then(res => {
@@ -205,6 +205,7 @@ export default {
             type: 'success'
           })
           this.search()
+          this.$message.success(res.msg)
         }
       })
     },

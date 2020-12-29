@@ -22,11 +22,11 @@
           <div class="d-l-mask">
             <i class="el-icon-star-off" @click="collectClick(pic.id)"></i>
           </div>
-          <div class="d-l-sign">
-            <span>
-              {{ pic.authorizationWay }}
-            </span>
-          </div>
+          <!--          <div class="d-l-sign">-->
+          <!--            <span>-->
+          <!--              {{ pic.authorizationWay }}-->
+          <!--            </span>-->
+          <!--          </div>-->
         </div>
       </div>
       <div v-else class="text-center mt-48">

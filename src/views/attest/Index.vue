@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <PersonalHeader text="供图认证" />
+    <PersonalHeader text="认证供图" />
     <div class="attest">
       <div class="attest-steps">
         <template v-if="active === 2">
@@ -29,45 +29,44 @@
               </el-form-item>
             </template>
             <el-form-item :label="form.type===2?'负责人姓名：':'姓名：'">
-              <el-input v-model="form.principalName"></el-input>
+              <el-input v-model="form.principalName" :disabled="this.id !== ''&& this.type !== 2"></el-input>
             </el-form-item>
             <el-form-item label="身份证号码：">
-              <el-input v-model="form.idCardNumber"></el-input>
+              <el-input v-model="form.idCardNumber" :disabled="this.id !== ''&& this.type !== 2"></el-input>
             </el-form-item>
-            <el-form-item label="手机号：" prop="mobile">
-              <el-input v-model="form.mobile"></el-input>
-            </el-form-item>
-            <el-form-item label="验证码：">
-              <div class="f-p-code flex">
-                <el-input v-model="form.identifyCode" auto-complete="off">
-                </el-input>
-                <el-button
-                  type="primary"
-                  class="p-0"
-                  plain
-                  :disabled="showTimer || form.mobile === ''"
-                  @click="getCode"
-                >
-                  <template
-                    v-if="showTimer"
-                  >{{ count }}s</template>
-                  <template
-                    v-else
-                  >获取验证码</template>
-                </el-button>
+            <template v-if="type !== 1">
+              <el-form-item label="手机号：" prop="mobile">
+                <el-input v-model="form.mobile"></el-input>
+              </el-form-item>
+              <el-form-item label="验证码：">
+                <div class="f-p-code flex">
+                  <el-input v-model="form.identifyCode" auto-complete="off">
+                  </el-input>
+                  <el-button
+                    type="primary"
+                    class="p-0"
+                    plain
+                    :disabled="showTimer || form.mobile === ''"
+                    @click="getCode"
+                  >
+                    <template
+                      v-if="showTimer"
+                    >{{ count }}s</template>
+                    <template
+                      v-else
+                    >获取验证码</template>
+                  </el-button>
+                </div>
+              </el-form-item>
+              <div class="text-center">
+                <el-checkbox v-model="agree">
+                  我同意<a
+                    href="javascript:"
+                    @click="serviceDialogClick"
+                  >《能源图库用户服务条款》</a>
+                </el-checkbox>
               </div>
-            </el-form-item>
-            <div class="text-center">
-              <el-checkbox v-model="agree">
-                我同意<a
-                  href="javascript:"
-                  @click="serviceDialogClick"
-                >隐私服务</a>和<a
-                  href="javascript:"
-                  @click="serviceDialogClick"
-                >服务说明</a>
-              </el-checkbox>
-            </div>
+            </template>
             <el-button
               v-if="form.type===2"
               type="primary"
@@ -82,7 +81,7 @@
               type="primary"
               size="small"
               class="m-s-btn"
-              :disabled="form.type === '' || form.principalName === ''|| form.idCardNumber === ''|| form.mobile === ''|| form.identifyCode === ''"
+              :disabled="type === 1 || form.type === '' || form.principalName === ''|| form.idCardNumber === ''|| form.mobile === ''|| form.identifyCode === ''"
               @click="nextStepSecond"
             >确认</el-button>
           </el-form>
@@ -132,11 +131,16 @@ export default {
       rules: {
         mobile: [{ validator: validateMobile, trigger: 'blur' }]
       },
-      id: ''
+      id: '',
+      type: '', // 用于认证回显判断
+      status: ''
     }
   },
   created() {
-    this.getUserAuthInfo()
+    this.status = this.$route.query.status
+    if (this.status === 1 || this.status === 2) {
+      this.getUserAuthInfo()
+    }
   },
   methods: {
     getUserAuthInfo() {
@@ -144,6 +148,7 @@ export default {
         if (res.code === 1000) {
           this.form = res.data
           this.id = res.data.id
+          this.type = res.data.type
         }
       })
     },
@@ -168,7 +173,15 @@ export default {
       if (this.id) {
         this.$api.user.modifyUserAuth(this.form).then(res => {
           if (res.code === 1000) {
-            this.active = 3
+            this.$message({
+              duration: 1500,
+              message: '修改成功！',
+              type: 'success'
+            })
+            this.showTimer = false
+            clearInterval(this.timer)
+            this.timer = null
+            this.getUserAuthInfo()
           }
         })
       } else {
