@@ -2,7 +2,7 @@
   <div class="footer">
     <ul class="flex justify-center">
       <li @click="$router.push('/info/about')">关于我们</li>
-      <li>授权信息</li>
+      <li @click="$router.push('/info/authorize')">授权协议</li>
     </ul>
     <div class="footer-nav">
       <div class="text-center">
@@ -39,7 +39,7 @@ export default {
     border-bottom: 1px solid #494949;
     li{
       margin-right: 64px;
-      &:nth-child(3){
+      &:nth-child(2){
         margin-right: unset;
       }
     }

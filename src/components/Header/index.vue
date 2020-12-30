@@ -2,11 +2,11 @@
   <div class="main">
     <swiper :options="swiperOption">
       <swiper-slide>
-        <a href="#"><img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt=""></a>   </swiper-slide>
+        <a href="#"><img src="../../assets/img/pic-one.jpg" alt=""></a>   </swiper-slide>
       <swiper-slide>
-        <a href="#"><img src="https://goss.cfp.cn/static/home/h2_6.png?x-oss-process=image/format,webp" alt=""></a>  </swiper-slide>
+        <a href="#"><img src="../../assets/img/pic-two.jpg" alt=""></a>  </swiper-slide>
       <swiper-slide>
-        <a href="#"><img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="" /></a>
+        <a href="#"><img src="../../assets/img/pic-three.jpg" alt="" /></a>
       </swiper-slide>
       <div
         slot="pagination"
