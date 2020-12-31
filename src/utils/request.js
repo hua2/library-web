@@ -72,7 +72,7 @@ instance.interceptors.response.use(
     // 要求登录，跳转登录页面
     if (res.data.code && res.data.code === 1003) {
       store.commit('logout')
-      const redirect = router.currentRoute.path
+      const redirect = router.currentRoute.fullPath
       router.push(`/login/index?redirect=${redirect}`)
     }
     if (res.data.code && res.data.code !== 1000 && res.data.msg) {

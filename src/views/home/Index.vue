@@ -16,12 +16,12 @@
       <div class="h-c-more" @click="moreClick">更多 >></div>
       <div class="w-full h-c-title">
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
-        <div class="h-c-join flex justify-between">
-          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_6.png?x-oss-process=image/format,webp" alt="">
-          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">
-        </div>
+        <!--        <div class="h-c-join flex justify-between">-->
+        <!--          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">-->
+        <!--          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">-->
+        <!--          <img src="https://goss.cfp.cn/static/home/h2_6.png?x-oss-process=image/format,webp" alt="">-->
+        <!--          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">-->
+        <!--        </div>-->
       </div>
     </div>
   </div>
