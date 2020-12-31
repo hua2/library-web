@@ -2,11 +2,11 @@
   <div class="main">
     <swiper :options="swiperOption">
       <swiper-slide>
-        <a href="#"><img src="../../assets/img/pic-one.jpg" alt=""></a>   </swiper-slide>
+        <a href="#"><img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-one.jpg" alt=""></a>   </swiper-slide>
       <swiper-slide>
-        <a href="#"><img src="../../assets/img/pic-two.jpg" alt=""></a>  </swiper-slide>
+        <a href="#"><img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-two.jpg" alt=""></a>  </swiper-slide>
       <swiper-slide>
-        <a href="#"><img src="../../assets/img/pic-three.jpg" alt="" /></a>
+        <a href="#"><img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-three.jpg" alt="" /></a>
       </swiper-slide>
       <div
         slot="pagination"
