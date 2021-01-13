@@ -11,6 +11,11 @@
         />
       </div>
       <div class="d-c-right">
+        <h4>选择用途</h4>
+        <div class="d-c-btn">
+          <el-radio v-model="photoType" :label="1" border>杂志（ 含周刊 ）- 封面配图</el-radio>
+          <el-radio v-model="photoType" :label="2" border>杂志（ 含周刊 ）- 内页配图</el-radio>
+        </div>
         <h4>基本信息</h4>
         <div>
           <p>
@@ -74,6 +79,7 @@ export default {
   data() {
     return {
       id: '',
+      photoType: 1,
       details: {},
       record: {
         isCan: 0,
@@ -156,7 +162,8 @@ export default {
       this.$api.user.userOrderSubmit({
         orderType: 4,
         payment: 1,
-        productionId: id
+        productionId: id,
+        photoType: this.photoType
       }).then(res => {
         if (res.code === 1000) {
           this.$refs.downloadDialog.qrCode = res.data.qrCode
@@ -211,6 +218,23 @@ export default {
     .d-c-right {
       width: 32%;
       padding-left: 24px;
+      .d-c-btn{
+        .el-radio{
+          width: 100%;
+          max-width: 368px;
+          margin-top: 12px;
+          color: #666;
+          &:last-child{
+            margin-left: unset;
+            margin-bottom: 12px;
+          }
+        }
+        /deep/{
+          .el-radio__label{
+            font-size: 14px;
+          }
+        }
+      }
       p {
         font-size: 12px;
         line-height: 1.6;

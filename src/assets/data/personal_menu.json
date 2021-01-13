@@ -71,5 +71,21 @@
         "link": "/personal/otherMessage"
       }
     ]
+  },
+  {
+    "title": "提示",
+    "permission": ["authenticator"],
+    "children": [
+      {
+        "title": "技术要求",
+        "permission": ["authenticator"],
+        "link": "/personal/notice"
+      },
+      {
+        "title": "关于收益",
+        "permission": ["authenticator"],
+        "link": "/personal/income"
+      }
+    ]
   }
 ]

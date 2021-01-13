@@ -171,6 +171,16 @@ const router = new Router({
           path: 'personal/otherMessage',
           component: () =>
               import(/* webpackChunkName: "personal_otherMessage" */ '@/views/personal/OtherMessage.vue')
+        },
+        {
+          path: 'personal/notice',
+          component: () =>
+              import(/* webpackChunkName: "personal_notice" */ '@/views/personal/Notice.vue')
+        },
+        {
+          path: 'personal/income',
+          component: () =>
+              import(/* webpackChunkName: "personal_income" */ '@/views/personal/Income.vue')
         }
       ]
     }

@@ -168,6 +168,28 @@
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
   }
 }
+// 个人中心-提示模块
+.tip{
+  .tip-content{
+    width: 904px;
+    height: fit-content;
+    padding: 16px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    h5{
+      font-size: 14px;
+      margin-top: 12px;
+      &:first-child{
+        margin-top: unset;
+      }
+    }
+    p {
+      color: #999999;
+      margin-top: 8px;
+      font-size: 12px;
+      position: relative;
+    }
+  }
+}
 
 // search
 .home, .display, .details {
