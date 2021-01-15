@@ -4,11 +4,6 @@
     "permission": ["user","authenticator"],
     "children": [
       {
-        "title": "个人信息",
-        "permission": ["user","authenticator"],
-        "link": "/personal/index"
-      },
-      {
         "title": "收藏记录",
         "permission": ["user","authenticator"],
         "link": "/personal/collect"

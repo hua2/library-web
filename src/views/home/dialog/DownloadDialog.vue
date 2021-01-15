@@ -5,8 +5,8 @@
       <canvas ref="canvas" />
     </div>
     <strong class="text-16">支付方式：微信扫码支付</strong>
-    <p>能源图库会员更优惠</p>
-    <el-button type="primary" @click="goToClick">了解详情</el-button>
+    <!--    <p>能源图库会员更优惠</p>-->
+    <!--    <el-button type="primary" @click="goToClick">了解详情</el-button>-->
   </el-dialog>
 </template>
 
@@ -37,10 +37,10 @@ export default {
     handlerClose() {
       this.$emit('close')
     },
-    goToClick() {
-      this.$emit('close')
-      this.$router.push('/personal/index')
-    },
+    // goToClick() {
+    //   this.$emit('close')
+    //   this.$router.push('/personal/index')
+    // },
     initByVal(val) {
       QRCode.toCanvas(this.$refs.canvas, val, error => {
         if (error) {
@@ -70,7 +70,7 @@ export default {
       text-align: center;
     }
     .el-dialog__body {
-      padding: 0 0 36px 0;
+      padding: 0 0 24px 0;
       text-align: center;
     }
     h4{
@@ -88,15 +88,15 @@ export default {
         margin: 12px auto;
       }
     }
-    p{
-      color: #666;
-      margin: 16px 0 8px 0;
-    }
-    .el-button{
-      height: 30px;
-      padding: 4px 16px;
-      border-radius: 16px;
-    }
+    //p{
+    //  color: #666;
+    //  margin: 16px 0 8px 0;
+    //}
+    //.el-button{
+    //  height: 30px;
+    //  padding: 4px 16px;
+    //  border-radius: 16px;
+    //}
   }
 }
 

@@ -23,7 +23,7 @@
                 />
                 <span class="truncate">{{ account.nickname ? account.nickname : account.mobile }}</span>
               </template>
-              <el-menu-item index="2-1" @click="$router.push('/personal/index')">个人信息</el-menu-item>
+              <!--              <el-menu-item index="2-1" @click="$router.push('/personal/index')">个人信息</el-menu-item>-->
               <el-menu-item index="2-2" @click="$router.push('/personal/account')">账户信息</el-menu-item>
               <el-menu-item index="2-3" @click="$router.push('/personal/updatePwd')">修改密码</el-menu-item>
               <el-menu-item index="2-3" @click="exitLogout">退出</el-menu-item>

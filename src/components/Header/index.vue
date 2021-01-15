@@ -39,7 +39,7 @@
             <template v-else>
               <el-submenu index="6" class="h-sub">
                 <template slot="title">个人中心</template>
-                <el-menu-item index="2-1" @click="$router.push('/personal/index')">个人信息</el-menu-item>
+                <!--                <el-menu-item index="2-1" @click="$router.push('/personal/index')">个人信息</el-menu-item>-->
                 <el-menu-item index="2-2" @click="$router.push('/personal/account')">账户信息</el-menu-item>
                 <el-menu-item index="2-3" @click="$router.push('/personal/updatePwd')">修改密码</el-menu-item>
                 <el-menu-item index="2-3" @click="exitLogout">退出</el-menu-item>
@@ -128,7 +128,7 @@ export default {
         this.$router.push('/login/index')
       }
       if (key === '6') {
-        this.$router.push('/personal/index')
+        this.$router.push('/personal/account')
       }
     }
   }

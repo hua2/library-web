@@ -126,7 +126,7 @@ export default {
             })
             this.$store.dispatch('getLoginUserDate')
           }
-          this.$router.push({ path: this.redirect || '/personal/index' })
+          this.$router.push({ path: this.redirect || '/personal/account' })
         }
       })
     }
