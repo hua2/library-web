@@ -162,6 +162,22 @@ const user = {
   // 个人中心-
   member(params) {
     return axios.get(`/user/member`, { params: params })
+  },
+  // 查询列表
+  queryList(params) {
+    return axios.get(`/userEarnings/queryList`, { params })
+  },
+  // 添加银行卡
+  addBankCard(data) {
+    return axios.post(`/userBankCard/addBankCard`, data)
+  },
+  // 查询银行卡列表
+  queryBankCard() {
+    return axios.get(`/userBankCard/queryBankCard`)
+  },
+  // 解绑银行卡
+  unbindBank(params) {
+    return axios.get(`/userBankCard/unbind`, { params: params })
   }
 }
 

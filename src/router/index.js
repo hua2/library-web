@@ -181,6 +181,21 @@ const router = new Router({
           path: 'personal/income',
           component: () =>
               import(/* webpackChunkName: "personal_income" */ '@/views/personal/Income.vue')
+        },
+        {
+          path: 'finance/index',
+          component: () =>
+              import(/* webpackChunkName: "finance_index" */ '@/views/personal/finance/Index.vue')
+        },
+        {
+          path: 'finance/bankCard',
+          component: () =>
+              import(/* webpackChunkName: "finance_bankCard" */ '@/views/personal/finance/BankCard.vue')
+        },
+        {
+          path: 'finance/AddBank',
+          component: () =>
+              import(/* webpackChunkName: "finance_addBankCard" */ '@/views/personal/finance/AddBank.vue')
         }
       ]
     }

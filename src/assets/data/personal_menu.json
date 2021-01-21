@@ -52,6 +52,22 @@
     ]
   },
   {
+    "title": "财务管理",
+    "permission": ["authenticator"],
+    "children": [
+      {
+        "title": "个人账户",
+        "permission": ["authenticator"],
+        "link": "/finance/bankCard"
+      },
+      {
+        "title": "交易记录",
+        "permission": ["authenticator"],
+        "link": "/finance/index"
+      }
+    ]
+  },
+  {
     "title": "消息",
     "permission": ["user","authenticator"],
     "children": [
