@@ -4,6 +4,10 @@
       <el-input v-model="keyWords" placeholder="搜索图片……" @keyup.enter.native="searchEnter">
         <el-button slot="append" icon="el-icon-search" @click="searchClick(keyWords)"></el-button>
       </el-input>
+      <div v-for="(h,index) in searchData" :key="index" class="h-s-word" @click="searchClick(h.keyWord)">
+        热门搜索：
+        <span>{{ h.keyWord }}</span>
+      </div>
     </div>
     <div v-loading="loading" class="home-content">
       <div v-for="(i,index) in moreData" :key="index" class="h-c-pic" @click="goToDisplay(i.id)">
@@ -16,12 +20,11 @@
       <div class="h-c-more" @click="moreClick">更多 >></div>
       <div class="w-full h-c-title">
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
-        <!--        <div class="h-c-join flex justify-between">-->
-        <!--          <img src="https://goss.cfp.cn/static/home/h2_5.png?x-oss-process=image/format,webp" alt="">-->
-        <!--          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">-->
-        <!--          <img src="https://goss.cfp.cn/static/home/h2_6.png?x-oss-process=image/format,webp" alt="">-->
-        <!--          <img src="https://goss.cfp.cn/static/home/h2_7.png?x-oss-process=image/format,webp" alt="">-->
-        <!--        </div>-->
+        <swiper ref="mySwiper" :options="swiperOption">
+          <swiper-slide v-for="(p,index) in partiesData" :key="index" class="swiper-item">
+            <img :src="p.picPath" alt="">
+          </swiper-slide>
+        </swiper>
       </div>
     </div>
   </div>
@@ -33,19 +36,45 @@
  * @author lyh
  * @date 2020-11-17
  */
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'Home',
-  components: { },
+  components: { swiper, swiperSlide },
   data() {
     return {
+      swiperOption: {
+        init: false,
+        autoplay: {
+          delay: 1000, // 1秒切换一次
+          disableOnInteraction: false
+        },
+        loop: true,
+        slidesPerView: 7, // 设置slider容器能够同时显示的slides数量(carousel模式)。
+        spaceBetween: 3
+      },
       hideData: [],
       moreData: [],
+      partiesData: [],
+      searchData: [],
       keyWords: '',
       loading: false
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    }
+  },
+  updated() {
+    if (this.partiesData.length > 1) {
+      this.swiper.init()
+    }
+  },
   created() {
     this.hideList()
+    this.partiesList()
+    this.hotSearch()
   },
   methods: {
     // 回车搜索
@@ -68,6 +97,22 @@ export default {
       this.$router.push({
         path: '/home/display',
         query: { id: id }
+      })
+    },
+    // 热门搜索
+    hotSearch() {
+      this.$api.user.hotSearch().then(res => {
+        if (res.code === 1000) {
+          this.searchData = res.data
+        }
+      })
+    },
+    // 签约供稿人
+    partiesList() {
+      this.$api.user.partiesList().then(res => {
+        if (res.code === 1000) {
+          this.partiesData = res.data
+        }
       })
     },
     hideList() {
@@ -96,9 +141,32 @@ export default {
 <style scoped lang="scss">
 .home {
   width: 100%;
-  .search{
+
+  .search {
     width: 100%;
+    margin-bottom: 32px;
+
+    .h-s-word {
+      display: flex;
+      flex-wrap: wrap;
+      color: #908C8C;
+      font-size: 14px;
+      margin-left: 12px;
+
+      span {
+        cursor: pointer;
+        margin-right: 12px;
+      }
+    }
   }
+
+  /deep/ {
+    .el-input {
+      width: 100%;
+      margin: 32px 0 6px 0;
+    }
+  }
+
   .home-content {
     width: 100%;
     display: flex;
@@ -151,21 +219,30 @@ export default {
 
     .h-c-title {
       margin: 72px auto;
+
       h1 {
         text-align: center;
         font-size: 30px;
         color: #000000;
         letter-spacing: 2px;
       }
-      .h-c-join {
-        //overflow-x: auto;
-        img {
-          width: 300px;
-          height: 300px;
-          object-fit: cover;
-          border-radius: 6px;
-          margin-top: 32px;
-        }
+
+      .swiper-container {
+        width: 100%;
+        height: auto;
+       padding: 36px 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition-property: all;
       }
     }
   }

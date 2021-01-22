@@ -178,6 +178,18 @@ const user = {
   // 解绑银行卡
   unbindBank(params) {
     return axios.get(`/userBankCard/unbind`, { params: params })
+  },
+  // 热门搜索
+  hotSearch(params) {
+    return axios.get(`/hotSearch/list`, { params: params })
+  },
+  // 首页banner
+  bannerList(params) {
+    return axios.get(`/banner/list`, { params: params })
+  },
+  // 签约供稿人
+  partiesList(params) {
+    return axios.get(`/partiesContract/list`, { params: params })
   }
 }
 

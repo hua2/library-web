@@ -1,13 +1,8 @@
 <template>
   <div class="main">
     <swiper :options="swiperOption">
-      <swiper-slide>
-        <a href="#"><img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-one.jpg" alt=""></a>   </swiper-slide>
-      <swiper-slide>
-        <a href="#"><img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-two.jpg" alt=""></a>  </swiper-slide>
-      <swiper-slide>
-        <a href="#"><img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-three.jpg" alt="" /></a>
-      </swiper-slide>
+      <swiper-slide v-for="(b,index) in bannerData" :key="index">
+        <a :href="b.jumpUrl" target="_blank"><img :src="b.imgUrl" alt=""></a>   </swiper-slide>
       <div
         slot="pagination"
         class="swiper-pagination swiper-pagination-bullets"
@@ -73,7 +68,8 @@ export default {
           }
         }
       },
-      hideData: []
+      hideData: [],
+      bannerData: []
     }
   },
   computed: {
@@ -83,8 +79,16 @@ export default {
   },
   created() {
     this.hideList()
+    this.bannerList()
   },
   methods: {
+    bannerList() {
+      this.$api.user.bannerList().then(res => {
+        if (res.code === 1000) {
+          this.bannerData = res.data
+        }
+      })
+    },
     authClick() {
       if (this.account.authStatus === 0) {
         this.$router.push({
