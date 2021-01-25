@@ -254,6 +254,18 @@
     .el-input{
       width: 80%;
     }
+    .h-s-word{
+      display: none;
+    }
+  }
+  #app .home .home-content .h-c-title{
+   .swiper-container{
+     padding-top: 36px;
+     .swiper-slide img{
+       width: 142px;
+       height: 178px;
+     }
+   }
   }
   #app .home .home-content .h-c-pic img{
     height: 320px;

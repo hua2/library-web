@@ -22,7 +22,7 @@
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
         <swiper ref="mySwiper" :options="swiperOption">
           <swiper-slide v-for="(p,index) in partiesData" :key="index" class="swiper-item">
-            <img :src="p.picPath" alt="">
+            <img :src="p.picPath + '?x-oss-process=image/quality,q_55'" alt="">
           </swiper-slide>
         </swiper>
       </div>
@@ -46,9 +46,11 @@ export default {
       swiperOption: {
         init: false,
         autoplay: {
-          delay: 1000, // 1秒切换一次
+          delay: 0,
           disableOnInteraction: false
         },
+        freeMode: true,
+        speed: 4000,
         loop: true,
         slidesPerView: 7, // 设置slider容器能够同时显示的slides数量(carousel模式)。
         spaceBetween: 3
@@ -165,6 +167,14 @@ export default {
       width: 100%;
       margin: 32px 0 6px 0;
     }
+    .swiper-container-free-mode>.swiper-wrapper {
+      -webkit-transition-timing-function: linear; /*之前是ease-out*/
+      -moz-transition-timing-function: linear;
+      -ms-transition-timing-function: linear;
+      -o-transition-timing-function: linear;
+      transition-timing-function: linear;
+      margin: 0 auto;
+    }
   }
 
   .home-content {
@@ -230,7 +240,7 @@ export default {
       .swiper-container {
         width: 100%;
         height: auto;
-       padding: 36px 0;
+        padding-top: 72px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -243,6 +253,12 @@ export default {
         justify-content: center;
         align-items: center;
         transition-property: all;
+        img{
+          width: 178px;
+          height: 240px;
+          object-fit: cover;
+          border-radius: 4px;
+        }
       }
     }
   }
