@@ -6,8 +6,8 @@
     </ul>
     <div class="footer-nav">
       <div class="text-center">
-        <p> 地址：北京市东城区广渠门内领行国际3号楼1201</p>
-        <p> 邮箱：picture@inengyuan.com   电话：010-67188377</p>
+        <p> 地址：北京市东城区广渠门内领行国际3-2-1201</p>
+        <p> 邮箱：304219360@qq.com  电话：18513394919</p>
         <p><a href="https://beian.miit.gov.cn" target="_blank">京ICP备18043511号</a> Copyright <span>©2019 - {{ new Date().getFullYear() }}</span> 北京角马能源科技有限公司</p>
       </div>
       <el-backtop>

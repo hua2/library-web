@@ -15,6 +15,7 @@
         <div class="d-c-btn">
           <el-radio v-model="photoType" :label="1" border>杂志（ 含周刊 ）- 封面配图</el-radio>
           <el-radio v-model="photoType" :label="2" border>杂志（ 含周刊 ）- 内页配图</el-radio>
+          <el-radio v-model="photoType" :label="3" border>杂志（ 含周刊 ）- 新媒体配图</el-radio>
         </div>
         <h4>基本信息</h4>
         <div>
@@ -222,11 +223,11 @@ export default {
         .el-radio{
           width: 100%;
           max-width: 368px;
-          margin-top: 12px;
           color: #666;
-          &:last-child{
-            margin-left: unset;
-            margin-bottom: 12px;
+          margin-left: unset;
+          margin-bottom: 12px;
+          &:first-child{
+            margin-top: 12px;
           }
         }
         /deep/{
@@ -247,7 +248,7 @@ export default {
         }
       }
       .el-button{
-        margin-top: 24px;
+        margin-top: 10px;
         width: 100%;
         max-width: 368px;
         height: 48px;
