@@ -158,6 +158,11 @@ const router = new Router({
               import(/* webpackChunkName: "publish_index" */ '@/views/publish/Index.vue')
         },
         {
+          path: 'publish/edit',
+          component: () =>
+              import(/* webpackChunkName: "publish_edit" */ '@/views/publish/Edit.vue')
+        },
+        {
           path: 'publish/release',
           component: () =>
               import(/* webpackChunkName: "publish_release" */ '@/views/publish/Release.vue')

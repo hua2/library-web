@@ -213,7 +213,7 @@ export default {
     // 图片编辑
     editProduct(id) {
       this.$router.push({
-        path: '/publish/index',
+        path: '/publish/edit',
         query: { id: id }
       })
     },

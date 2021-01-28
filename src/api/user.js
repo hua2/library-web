@@ -102,10 +102,12 @@ const user = {
   // 图片发布单图
   publishSingle(data) {
     const formData = new FormData()
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key])
+    data.forEach((d) => {
+      Object.keys(d).forEach((key) => {
+        formData.append(`${key}s`, d[key])
+      })
     })
-    return axios.post(`/production/publishSingle`, formData)
+    return axios.post(`/production/publishBatch`, formData)
   },
   // 图片查询个人展示
   personalList(params) {
@@ -121,7 +123,7 @@ const user = {
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key])
     })
-    return axios.post(`/production/modifySingle`, formData)
+    return axios.post(`/production/modify`, formData)
   },
   // 图片编辑回显
   getInfoProduct(params) {
