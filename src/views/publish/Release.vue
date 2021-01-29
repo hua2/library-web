@@ -279,6 +279,7 @@ export default {
     width: 64px;
     height: 40px;
     margin: 0 auto;
+    object-fit: cover;
   }
   .shelf-btn {
     color: #00a75b;
