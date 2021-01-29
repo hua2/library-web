@@ -190,7 +190,7 @@ export default {
           this.isLoading = false
           if (res.code === 1000) {
             this.$message({
-              duration: 2000,
+              duration: 1000,
               message: '发布成功！',
               type: 'success'
             })
@@ -219,13 +219,14 @@ export default {
       width: 100%;
       left: 0;
       text-align: center;
-      height: 20px;
-      line-height: 20px;
+      height: 24px;
+      line-height: 24px;
       font-size: 12px;
-      //overflow-x: auto;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      overflow-x: auto;
+      padding: 0 6px;
+      overflow-y: hidden;
+      z-index: 12;
+      background: rgba(0,0,0,0.5);
     }
     .p-selected::after{
        position: absolute;
@@ -259,7 +260,7 @@ export default {
       object-fit: cover;
     }
     .el-upload-list--picture-card .el-upload-list__item-actions{
-      z-index: 999;
+      z-index: 11;
     }
     .el-form-item--small.el-form-item{
       &:nth-child(2n){
