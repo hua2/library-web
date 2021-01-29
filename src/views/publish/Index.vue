@@ -5,21 +5,20 @@
       <div class="publish-upload">
         <el-upload ref="upload" action="#" list-type="picture-card" :multiple="true" :auto-upload="false" :on-change="handleUploadChange">
           <i slot="default" class="el-icon-plus"></i>
-          <div slot="file" slot-scope="{file}">
+          <div slot="file" slot-scope="{file}" :class="file.url===imageInfo.url?'p-selected':''">
             <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
             <span class="el-upload-list__item-actions">
               <span class="el-upload-list__item-preview" @click="handleSetting(file)">
                 <i class="el-icon-setting"></i>
               </span>
-
               <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
                 <i class="el-icon-zoom-in"></i>
               </span>
-
               <span class="el-upload-list__item-delete" @click="handleRemove(file)">
                 <i class="el-icon-delete"></i>
               </span>
             </span>
+            <span class="p-name">{{ file.name }}</span>
           </div>
         </el-upload>
       </div>
@@ -167,19 +166,22 @@ export default {
       })
     },
     publishSingle() {
-      let can = true
+      let errorMsg = ''
       this.imageInfoes.forEach(imageInfo => {
+        let can = true
         Object.keys(imageInfo).forEach(k => {
-          console.log(k)
-          if (!imageInfo[k]) {
+          if (imageInfo[k] === undefined || imageInfo[k] === '') {
             can = false
           }
         })
+        if (!can) {
+          errorMsg += `[${imageInfo.fileName}]属性不完整；`
+        }
       })
-      if (!can) {
+      if (errorMsg !== '') {
         this.$message({
           duration: 2000,
-          message: '请输入必填内容！',
+          message: errorMsg,
           type: 'warning'
         })
       } else {
@@ -210,6 +212,31 @@ export default {
   .publish-upload{
     max-height: 246px;
     overflow-y: auto;
+    .p-name{
+      color: red;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      height: 20px;
+      line-height: 20px;
+      font-size: 12px;
+      //overflow-x: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .p-selected::after{
+       position: absolute;
+       content: '';
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       border: 1px solid red;
+       border-radius: 5px;
+     }
   }
   /deep/{
     .el-upload--picture-card{
@@ -230,6 +257,9 @@ export default {
       width: 108px;
       height: 108px;
       object-fit: cover;
+    }
+    .el-upload-list--picture-card .el-upload-list__item-actions{
+      z-index: 999;
     }
     .el-form-item--small.el-form-item{
       &:nth-child(2n){
