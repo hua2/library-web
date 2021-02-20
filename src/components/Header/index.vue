@@ -150,7 +150,7 @@ export default {
   }
   .header {
     position: absolute;
-    top: 0;
+    top: 6px;
     left: 24px;
     right: 24px;
     z-index: 4;
