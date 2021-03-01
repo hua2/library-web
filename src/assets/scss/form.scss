@@ -204,3 +204,100 @@
     }
   }
 }
+
+// 图片详情
+.d-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2px;
+  text-align: left;
+  // 最后一行展示形式，可注释掉查看另一种形式
+  &::after {
+    content: "";
+    flex-grow: 999999999;
+    order: 999999999;
+  }
+
+  .d-l-pic {
+    margin: 2px;
+    background-color: violet;
+    position: relative;
+    cursor: pointer;
+    // 加载占位符
+    & > i {
+      display: block;
+      background-color: lightblue;
+      /* display: none; */
+    }
+
+    & > img {
+      position: absolute;
+      vertical-align: bottom;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    & > .shadow{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background: rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover{
+      .d-l-mask{
+        opacity: 1;
+        z-index: 2001;
+      }
+      .d-l-sign{
+        opacity: 1;
+      }
+      .shadow{
+        z-index: 2000;
+        opacity: 1;
+      }
+    }
+
+    .d-l-mask {
+      position: absolute;
+      left: 16px;
+      right: 18px;
+      bottom: 20px;
+      text-align: left;
+      opacity: 0;
+      color: #ffffff;
+      transform: translateX(-8px);
+      transition: all 0.2s ease-in-out;
+      i {
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 2px;
+        margin: 0 4px 4px 0;
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+    .d-l-sign{
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      cursor: pointer;
+      opacity: 0;
+      span{
+        font-size: 14px;
+        padding: 0 5px;
+        background: #fff;
+        color: #666666;
+        vertical-align: middle;
+        border-radius: 2px;
+        transition: all 0.2s ease-in-out
+      }
+    }
+  }
+}

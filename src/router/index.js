@@ -35,6 +35,11 @@ const router = new Router({
               import(/* webpackChunkName: "home_details" */ '@/views/home/Details.vue')
         },
         {
+          path: 'home/activity',
+          component: () =>
+              import(/* webpackChunkName: "home_activity" */ '@/views/home/activity/Index.vue')
+        },
+        {
           path: 'info/about',
           component: () =>
               import(/* webpackChunkName: "about" */ '@/views/info/About.vue')
@@ -215,6 +220,7 @@ const whiteList = [
   '/home',
   '/home/display',
   '/home/details',
+  '/home/activity',
   '/login/index',
   '/login/forget-pwd',
   '/login/reset-pwd',

@@ -245,6 +245,20 @@
     .h-c-more{
      width: 80%;
     }
+    .h-c-activity{
+      width: 80%;
+      .h-a-pic{
+        .h-a-cover{
+          width: 560px;
+        }
+      }
+      .h-a-other{
+        width: calc(100% - 560px);
+        .h-a-reserved{
+          width: 218px;
+        }
+      }
+    }
   }
 }
 @media screen and (max-width: 1024px) {
@@ -256,6 +270,18 @@
     }
     .h-s-word{
       display: none;
+    }
+  }
+  #app .home .home-content .h-c-activity{
+    .h-a-title{
+      width: 80%;
+      margin: 0 auto
+    }
+    .h-a-pic  {
+      justify-content: center;
+      .h-a-other{
+        display: none;
+      }
     }
   }
   #app .home .home-content .h-c-title{

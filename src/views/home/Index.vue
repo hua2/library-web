@@ -18,9 +18,40 @@
         </div>
       </div>
       <div class="h-c-more" @click="moreClick">更多 >></div>
+      <div class="w-full h-c-activity">
+        <div class="h-a-title">
+          <img src="../../assets/img/hot-activity-icon.png" alt="">
+          <h1>热门活动</h1>
+          <div class="h-a-line"></div>
+        </div>
+        <div class="h-a-pic flex justify-between">
+          <div class="h-a-cover cursor-pointer" @click="activityClick(27)">
+            <img src="http://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/column/image_16143203428311.jpg?x-oss-process=image/quality,q_55" alt="">
+            <p class="truncate">“回眸十三五、展望十四五”能源摄影作品征集活动</p>
+          </div>
+          <div class="h-a-other flex flex-wrap">
+            <div class="h-a-reserved">
+              <img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-one.jpg" alt="">
+              <p class="truncate-2">“回眸十三五、展望十四五”能源摄影作品征集活动</p>
+            </div>
+            <div class="h-a-reserved">
+              <img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-one.jpg" alt="">
+              <p class="truncate-2">“回眸十三五、展望十四五”能源摄影作品征集活动</p>
+            </div>
+            <div class="h-a-reserved">
+              <img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-one.jpg" alt="">
+              <p class="truncate-2">“回眸十三五、展望十四五”能源摄影作品征集活动</p>
+            </div>
+            <div class="h-a-reserved">
+              <img src="https://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/banner/pic-one.jpg" alt="">
+              <p class="truncate-2">“回眸十三五、展望十四五”能源摄影作品征集活动</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="w-full h-c-title">
         <h1>加入能源图库平台 | 成为签约供稿人</h1>
-        <swiper ref="mySwiper" :options="swiperOption">
+        <swiper v-if="partiesData.length>0" ref="mySwiper" :options="swiperOption">
           <swiper-slide v-for="(p,index) in partiesData" :key="index" class="swiper-item">
             <img :src="p.picPath + '?x-oss-process=image/quality,q_55'" alt="">
           </swiper-slide>
@@ -135,6 +166,12 @@ export default {
       const st = this.moreData.length
       const et = st + 4
       this.moreData.push(...(this.hideData.slice(st, et)))
+    },
+    activityClick(id) {
+      this.$router.push({
+        path: '/home/activity',
+        query: { id: id }
+      })
     }
   }
 }
@@ -182,16 +219,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
+    img{
+      border-radius: 4px;
+      object-fit: cover;
+    }
     .h-c-pic {
       margin-bottom: 24px;
 
       img {
         width: 615px;
         height: 384px;
-        object-fit: cover;
         cursor: pointer;
-        border-radius: 4px;
       }
 
       .h-c-title {
@@ -256,10 +294,65 @@ export default {
         img{
           width: 178px;
           height: 240px;
-          object-fit: cover;
-          border-radius: 4px;
         }
       }
+    }
+    .h-c-activity{
+      margin: 72px auto 0;
+      .h-a-title{
+        display: flex;
+        align-items: center;
+        img{
+          width: 32px;
+          height: 32px;
+        }
+
+        h1 {
+          width: 104px;
+          font-size: 24px;
+          color: #000000;
+          letter-spacing: 2px;
+          margin-right: 4px;
+        }
+
+        .h-a-line{
+          width: calc(100% - 108px - 32px);
+          height: 1px;
+          margin-top: 18px;
+          background: #979797;
+        }
+      }
+       .h-a-pic {
+         margin-top: 24px;
+         p{
+           margin-top: 4px;
+           font-size: 14px;
+         }
+         .h-a-cover{
+           width: 600px;
+
+           img {
+             width: 100%;
+             height: calc(100% - 25px);
+             min-height: 365px;
+           }
+         }
+         .h-a-other{
+           display: none;
+           width: calc(100% - 600px);
+           .h-a-reserved{
+             width: 326px;
+             margin-left: 6px;
+             img {
+               width: 100%;
+               height: 158px;
+             }
+             &:nth-child(3),&:nth-child(4){
+               margin-top: 24px;
+             }
+           }
+         }
+       }
     }
   }
 }

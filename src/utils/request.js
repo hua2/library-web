@@ -38,7 +38,7 @@ const errorHandle = (status, other) => {
 var instance = axios.create({
   timeout: 1000 * 12,
   baseURL: 'http://tuku.jiaomaenergy.com/md-api/'
-  // baseURL: 'http://192.168.4.26:8080/'
+  // baseURL: 'http://192.168.5.109:8080/'
 })
 // 设置post请求头
 instance.defaults.headers.post['Content-Type'] =
