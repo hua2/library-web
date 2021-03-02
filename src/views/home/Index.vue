@@ -26,7 +26,7 @@
         </div>
         <div class="h-a-pic flex justify-between">
           <div class="h-a-cover cursor-pointer" @click="activityClick(27)">
-            <img src="http://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/column/image_16143203428311.jpg?x-oss-process=image/quality,q_55" alt="">
+            <img src="http://jm-prod-bkt-01.oss-cn-beijing.aliyuncs.com/md/picture/column/image_16143203428311.jpg" alt="">
             <p class="truncate">“回眸十三五、展望十四五”能源摄影作品征集活动</p>
           </div>
           <div class="h-a-other flex flex-wrap">
